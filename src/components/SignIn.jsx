@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -9,6 +11,10 @@ const SignIn = ({showSignIn, setShowSignIn}) => {
     const [password, setPassword] = useState('');
 
     const hideSignIn = () => setShowSignIn(false);
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+    };
 
     return (
         <Modal show={showSignIn} onHide={hideSignIn}>
