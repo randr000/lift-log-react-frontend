@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SignIn from "./SignIn";
 import Button from "react-bootstrap/Button";
+import AppContext from "../AppContext";
 
-const Navbar = ({setShowSignIn}) => {
+const Navbar = () => {
+
+    const {setShowSignIn} = useContext(AppContext);
+
+    // const handleSignInClick
 
     return (
         <nav className="navbar navbar-light bg-light">

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from '../AppContext';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
@@ -6,7 +7,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { setUserProperties } from 'firebase/analytics';
 
-const SignIn = ({showSignIn, setShowSignIn}) => {
+const SignIn = () => {
+
+    const {showSignIn, setShowSignIn} = useContext(AppContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -47,10 +50,12 @@ const SignIn = ({showSignIn, setShowSignIn}) => {
                         </Form.Group>
                     
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button type="submit" variant="primary">Sign In</Button>
-                        <Button variant="secondary" onClick={hideSignIn}>Close</Button>
-                        {error && <span>Wrong Email or Password</span>}
+                    <Modal.Footer className="d-flex flex-column">
+                        <div>
+                            <Button className="m-1" type="submit" variant="primary">Sign In</Button>
+                            <Button className="m-1" variant="secondary" onClick={hideSignIn}>Close</Button>
+                        </div>
+                        {error && <p className="text-danger fw-bold">Wrong Email or Password</p>}
                     </Modal.Footer>
                 </Form>
         </Modal>

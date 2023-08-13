@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
-import MyContext from './MyContext';
+import AppContext from './AppContext';
 import Navbar from './components/Navbar';
 import SignIn from './components/SignIn';
 
 function App() {
 
   const [showSignIn, setShowSignIn] = useState(false);
+  // const [signInError, setSignInError] = useState(false);
 
   const globalState = {
     showSignIn,
-    setShowSignIn
+    setShowSignIn,
+    // signInError,
+    // setShowSignInError
   };
 
   return (
     <div className="App">
-      <MyContext.Provider value={globalState}>
-        <Navbar setShowSignIn={setShowSignIn} />
-        <SignIn showSignIn={showSignIn} setShowSignIn={setShowSignIn} />
-      </MyContext.Provider>
+      <AppContext.Provider value={globalState}>
+        <Navbar />
+        <SignIn />
+      </AppContext.Provider>
     </div>
   );
 }
