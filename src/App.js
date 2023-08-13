@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AppContext from './AppContext';
+import AppContext from './contexts/AppContext';
 import Navbar from './components/Navbar';
 import SignIn from './components/SignIn';
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import SignIn from "./SignIn";
 import Button from "react-bootstrap/Button";
-import AppContext from "../AppContext";
+import AppContext from '../contexts/AppContext';
 
 const Navbar = () => {
 

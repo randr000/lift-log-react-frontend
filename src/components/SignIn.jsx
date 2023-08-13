@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import AppContext from '../AppContext';
+import AppContext from '../contexts/AppContext';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
