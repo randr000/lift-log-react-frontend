@@ -1,0 +1,5 @@
+const APP_ACTION_TYPES = {
+    OPEN_SIGN_IN_MODULE: 'OPEN_SIGN_IN_MODULE'
+};
+
+export default APP_ACTION_TYPES;
