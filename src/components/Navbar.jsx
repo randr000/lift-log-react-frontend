@@ -1,18 +1,11 @@
-import React, { useState, useReducer, useContext } from "react";
-import SignIn from "./SignIn";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import AppContext from '../contexts/AppContext';
-import { appReducer, APP_INITIAL_STATE } from "../reducers/appReducer";
 import APP_ACTION_TYPES from "../action-types/app-action-types";
-import App from "../App";
 
 const Navbar = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-
-    // const handleSignInClick
-
-    // const [state, dispatch] = useReducer(appReducer, APP_INITIAL_STATE);
+    const {dispatch} = useContext(AppContext);
 
     return (
         <nav className="navbar navbar-light bg-light">

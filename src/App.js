@@ -6,16 +6,6 @@ import { appReducer, APP_INITIAL_STATE } from './reducers/appReducer';
 
 function App() {
 
-  // const [showSignIn, setShowSignIn] = useState(false);
-  // const [signInError, setSignInError] = useState(false);
-
-  // const globalState = {
-  //   showSignIn,
-  //   setShowSignIn,
-  //   // signInError,
-  //   // setShowSignInError
-  // };
-
   const [app_state, dispatch] = useReducer(appReducer, APP_INITIAL_STATE);
 
   return (
