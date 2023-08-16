@@ -6,16 +6,15 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { setUserProperties } from 'firebase/analytics';
+import APP_ACTION_TYPES from '../action-types/app-action-types';
 
 const SignIn = () => {
 
-    const {showSignIn, setShowSignIn} = useContext(AppContext);
+    const {app_state, dispatch} = useContext(AppContext);
+    const {showSignIn, signInError} = app_state
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(false);
-
-    const hideSignIn = () => setShowSignIn(false);
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -23,18 +22,18 @@ const SignIn = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                hideSignIn();
+                dispatch({type: APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL});
                 console.log(user);
             })
             .catch((error) => {
-                setError(true);
+                dispatch({type: APP_ACTION_TYPES.SIGN_IN_UNSUCCESSFUL});
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
     };
 
     return (
-        <Modal show={showSignIn} onHide={hideSignIn}>
+        <Modal show={showSignIn} onHide={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE, payload: false})}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
@@ -53,9 +52,15 @@ const SignIn = () => {
                     <Modal.Footer className="d-flex flex-column">
                         <div>
                             <Button className="m-1" type="submit" variant="primary">Sign In</Button>
-                            <Button className="m-1" variant="secondary" onClick={hideSignIn}>Close</Button>
+                            <Button className="m-1" variant="secondary" onClick={() => dispatch({
+                                    type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE,
+                                    payload: false
+                                    })}
+                            >
+                                Close
+                            </Button>
                         </div>
-                        {error && <p className="text-danger fw-bold">Wrong Email or Password</p>}
+                        {signInError && <p className="text-danger fw-bold">Wrong Email or Password</p>}
                     </Modal.Footer>
                 </Form>
         </Modal>
