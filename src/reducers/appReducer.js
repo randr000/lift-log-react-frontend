@@ -3,6 +3,7 @@ import APP_ACTION_TYPES from "../action-types/app-action-types";
 export const APP_INITIAL_STATE = {
     showSignIn: false,
     signInError: false,
+    signedIn: false,
     user: false
 }
 
