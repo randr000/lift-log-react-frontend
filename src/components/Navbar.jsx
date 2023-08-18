@@ -9,13 +9,18 @@ const Navbar = () => {
 
     const {app_state, dispatch} = useContext(AppContext);
 
-    const {user} = app_state;
+    const {signedIn, user} = app_state;
+
+    const handleSignOut = () => {
+        signOut(auth);
+        dispatch({type: APP_ACTION_TYPES.SIGN_OUT})
+    }
 
     return (
         <nav className="navbar navbar-light bg-light">
             <div className="container-fluid">
-                {!user && <Button variant="primary" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE, payload: true})}>Sign In</Button>}
-                {user && <Button variant="primary" onClick={() => signOut(auth)}>Sign Out</Button>}
+                {!signedIn && <Button variant="primary" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE, payload: true})}>Sign In</Button>}
+                {signedIn && <Button variant="primary" onClick={handleSignOut}>Sign Out</Button>}
                 {console.log(user)}
             </div>
         </nav>

@@ -15,9 +15,11 @@ export const appReducer = (state, action) => {
         case APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE:
             return {...state, showSignIn: payload, signInError: false};
         case APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL:
-            return {...state, showSignIn: false, signInError: false, user: payload};
+            return {...state, showSignIn: false, signInError: false, signedIn: true, user: payload};
         case APP_ACTION_TYPES.SIGN_IN_UNSUCCESSFUL:
-            return {...state, signInError: true};
+            return {...state, signInError: true, signedIn: false};
+        case APP_ACTION_TYPES.SIGN_OUT:
+            return {...state, signedIn: false, user: false}
         default: return state;
     }
 };
