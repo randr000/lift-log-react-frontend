@@ -57,7 +57,7 @@ const SignIn = () => {
                                     payload: false
                                     })}
                             >
-                                Close
+                                Cancel
                             </Button>
                         </div>
                         {signInError && <p className="text-danger fw-bold">Wrong Email or Password</p>}

@@ -40,7 +40,7 @@ describe('All sign in modal elements load', () => {
 
     test('Close button loads', () => {
         renderInitialLoad();
-        const closeBtn = screen.getByText(/close/i);
+        const closeBtn = screen.getByRole('button', {name: /cancel/i});
         expect(closeBtn).toBeInTheDocument();
     });
 });
@@ -81,7 +81,7 @@ describe('All sign in modal elements do not load', () => {
 
     test('Close button does not load', () => {
         renderInitialLoad();
-        const closeBtn = screen.queryByText(/close/i);
+        const closeBtn = screen.queryByRole('button', {name: /cancel/i});
         expect(closeBtn).not.toBeInTheDocument();
     });
 });
