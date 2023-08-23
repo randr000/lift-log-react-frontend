@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SignIn from './SignIn';
 import AppContext from '../contexts/AppContext';
 import { APP_INITIAL_STATE } from '../reducers/appReducer';
+import userEvent from '@testing-library/user-event';
 
 describe('All sign in modal elements load', () => {
 
@@ -83,5 +84,38 @@ describe('All sign in modal elements do not load', () => {
         renderInitialLoad();
         const closeBtn = screen.queryByRole('button', {name: /cancel/i});
         expect(closeBtn).not.toBeInTheDocument();
+    });
+});
+
+describe('Email and Password inputs update after input from keyboard', () => {
+
+    const state = {...APP_INITIAL_STATE, showSignIn: true};
+    const renderInitialLoad = () => {
+        render(
+            <AppContext.Provider value={{app_state: state, dispatch: () => {}}}>
+                <SignIn />
+            </AppContext.Provider>
+        );
+    };
+
+    const testInput = (component, text='') => {
+        fireEvent.change(component, {target: {value: text}});
+        expect(component.value).toBe(text);
+    };
+        
+    test('Email address input updates correctly', () => {
+        renderInitialLoad();
+        const emailInput = screen.getByLabelText(/email address/i);
+        testInput(emailInput);
+        testInput(emailInput, 'test@test.com');
+        testInput(emailInput, '');
+    });
+
+    test('Password input updates correctly', () => {
+        renderInitialLoad();
+        const passwordInput = screen.getByLabelText(/password/i);
+        testInput(passwordInput);
+        testInput(passwordInput, 'asdk#2gdakl@');
+        testInput(passwordInput, '');
     });
 });
