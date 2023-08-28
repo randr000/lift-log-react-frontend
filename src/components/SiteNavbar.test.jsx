@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Navbar from './Navbar';
+import SiteNavbar from './SiteNavbar';
 import AppContext from '../contexts/AppContext';
 import { APP_INITIAL_STATE } from '../reducers/appReducer';
 
@@ -8,7 +8,7 @@ describe('Sign in and sign up buttons render correctly on initial load and sign 
     const initialRender = () => {
         render(
             <AppContext.Provider value={{app_state: APP_INITIAL_STATE, dispatch: () => {}}}>
-                <Navbar />
+                <SiteNavbar />
             </AppContext.Provider>
         );
     };
@@ -43,7 +43,7 @@ describe('Sign in and sign up buttons do not render and sign out button does whe
     const signInRender = () => {
         render(
             <AppContext.Provider value={{app_state: {...APP_INITIAL_STATE, signedIn: true}, dispatch: () => {}}}>
-                <Navbar />
+                <SiteNavbar />
             </AppContext.Provider>
         );
     };
