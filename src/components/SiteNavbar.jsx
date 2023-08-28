@@ -22,9 +22,9 @@ const SiteNavbar = () => {
     }
 
     return (
-        <Navbar expand="lg" fixed="top" className="bg-light">
+        <Navbar expand="lg" className="bg-light">
             <Container fluid>
-                <Navbar.Brand className="google-font-800 text-center fs-1 blue-logo-color" style={{color: "#066AE1"}}>liftlog</Navbar.Brand>
+                <Navbar.Brand className="google-font-800 text-center fs-3 blue-logo-color" style={{color: "#066AE1"}}>liftlog</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
