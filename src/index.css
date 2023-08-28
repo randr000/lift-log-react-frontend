@@ -1,5 +1,6 @@
 :root {
   --google-font-fam: 'Noto Sans JP', 'sans-serif';
+  --logo-blue: #066AE1;
 }
 
 body {
@@ -16,8 +17,12 @@ code {
     monospace;
 }
 
+.blue-logo-color {
+  color: var(--logo-blue);
+}
+
 .blue-background {
-  background-color: #066AE1;
+  background-color: var(--logo-blue);
 }
 
 .google-font-100 {
