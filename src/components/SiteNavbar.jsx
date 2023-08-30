@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Router, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
@@ -54,26 +54,6 @@ const SiteNavbar = () => {
         </Navbar>
     );
 
-
-    // return (
-    //     <nav className="navbar navbar-light bg-light">
-    //         <Button className=>
-    //             <span className="navbar-toggler-icon"></span>
-    //         </Button>
-    //         {/* <div className="container-fluid"> */}
-    //             <Stack direction="horizontal" gap={3}>
-                    // <Stack direction="horizontal" gap={3} className='ms-3'>
-                    //     {!signedIn && <Button variant="primary" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE, payload: true})}>Sign In</Button>}
-                    //     {!signedIn && <Button variant="success" onClick={() => {}}>Sign Up</Button>}
-                    //     {signedIn && <Button variant="primary" onClick={handleSignOut}>Sign Out</Button>}
-                    //     {console.log(user)}
-                    // </Stack>
-    //                 <h1 className="google-font-800 text-center fs-1 blue-logo-color">liftlog</h1>
-    //                 <Button variant="primary">About</Button>
-    //             </Stack>
-    //         {/* </div> */}
-    //     </nav>
-    // );
 };
 
 export default SiteNavbar;

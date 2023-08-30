@@ -2,14 +2,17 @@ import { render, screen } from '@testing-library/react';
 import SiteNavbar from './SiteNavbar';
 import AppContext from '../contexts/AppContext';
 import { APP_INITIAL_STATE } from '../reducers/appReducer';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('All navbar items render or do not render correctly when user is not signed in', () => {
 
     const initialRender = () => {
         render(
-            <AppContext.Provider value={{app_state: APP_INITIAL_STATE, dispatch: () => {}}}>
-                <SiteNavbar />
-            </AppContext.Provider>
+            <BrowserRouter>
+                <AppContext.Provider value={{app_state: APP_INITIAL_STATE, dispatch: () => {}}}>
+                    <SiteNavbar />
+                </AppContext.Provider>
+            </BrowserRouter>
         );
     };
 
@@ -56,9 +59,11 @@ describe('All navbar items render or do not render correctly when user is signed
 
     const signInRender = () => {
         render(
-            <AppContext.Provider value={{app_state: {...APP_INITIAL_STATE, signedIn: true}, dispatch: () => {}}}>
-                <SiteNavbar />
-            </AppContext.Provider>
+            <BrowserRouter>
+                <AppContext.Provider value={{app_state: {...APP_INITIAL_STATE, signedIn: true}, dispatch: () => {}}}>
+                    <SiteNavbar />
+                </AppContext.Provider>
+            </BrowserRouter>
         );
     };
 
