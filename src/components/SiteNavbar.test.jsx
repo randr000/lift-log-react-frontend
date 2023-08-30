@@ -3,7 +3,7 @@ import SiteNavbar from './SiteNavbar';
 import AppContext from '../contexts/AppContext';
 import { APP_INITIAL_STATE } from '../reducers/appReducer';
 
-describe('Sign in and sign up buttons render correctly on initial load and sign out button does not', () => {
+describe('All navbar items render or do not render correctly when user is not signed in', () => {
 
     const initialRender = () => {
         render(
@@ -12,6 +12,12 @@ describe('Sign in and sign up buttons render correctly on initial load and sign 
             </AppContext.Provider>
         );
     };
+
+    test('liftlog logo text renders', () => {
+        initialRender();
+        const logoTxt = screen.getByText(/liftlog/i);
+        expect(logoTxt).toBeInTheDocument();
+    });
 
     test('Sign In button renders', () => {
         initialRender();
@@ -36,9 +42,17 @@ describe('Sign in and sign up buttons render correctly on initial load and sign 
         });
         expect(signOutBtn).not.toBeInTheDocument();
     });
+
+    test('About button renders', () => {
+        initialRender();
+        const aboutBtn = screen.getByRole('button', {
+            name: "About"
+        });
+        expect(aboutBtn).toBeInTheDocument();
+    });
 });
 
-describe('Sign in and sign up buttons do not render and sign out button does when signed in', () => {
+describe('All navbar items render or do not render correctly when user is signed in', () => {
 
     const signInRender = () => {
         render(
@@ -47,6 +61,12 @@ describe('Sign in and sign up buttons do not render and sign out button does whe
             </AppContext.Provider>
         );
     };
+
+    test('liftlog logo text renders', () => {
+        signInRender();
+        const logoTxt = screen.getByText(/liftlog/i);
+        expect(logoTxt).toBeInTheDocument();
+    });
 
     test('Sign In button does not render', () => {
         signInRender();
@@ -70,5 +90,13 @@ describe('Sign in and sign up buttons do not render and sign out button does whe
         name: "Sign Out"
         });
         expect(signOutBtn).toBeInTheDocument();
+    });
+
+    test('About button renders', () => {
+        signInRender();
+        const aboutBtn = screen.getByRole('button', {
+            name: "About"
+        });
+        expect(aboutBtn).toBeInTheDocument();
     });
 });
