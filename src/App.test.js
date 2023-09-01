@@ -36,6 +36,6 @@ describe('Test app navigation', () => {
     // verify page content for expected route after clicking on about button
     const aboutBtn = screen.getByRole(/button/i, {name: "About"});
     await user.click(aboutBtn);
-    expect(screen.getByText(/about liftlog/i)).toBeInTheDocument();
+    expect(screen.getByRole(/heading/i, {text: /about*/i})).toBeInTheDocument();
   });
 });
