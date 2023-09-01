@@ -23,7 +23,7 @@ const SiteNavbar = () => {
     }
 
     return (
-        <Navbar expand="lg" className="bg-light">
+        <Navbar expand="lg" className="bg-light" data-testid="site-navbar">
             <Container fluid>
                 <Navbar.Brand
                     className="google-font-800 text-center fs-3 blue-logo-color"
