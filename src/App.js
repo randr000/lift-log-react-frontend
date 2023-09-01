@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState,useEffect } from 'react';
 import AppContext from './contexts/AppContext';
 import SiteNavbar from './components/SiteNavbar';
 // import SignIn from './components/SignIn';
@@ -10,6 +10,10 @@ import AppRoutes from './AppRoutes';
 function App() {
 
   const [app_state, dispatch] = useReducer(appReducer, APP_INITIAL_STATE);
+
+  // useEffect(() => {
+  //   console.log(app_state);
+  // }, [app_state]);
 
   return (
     <div className="App">

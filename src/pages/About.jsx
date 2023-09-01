@@ -1,5 +1,6 @@
 import React from 'react';
 import BlueBackground from '../components/BlueBackground';
+import SignIn from '../components/SignIn';
 
 const About = () => {
     return (

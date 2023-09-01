@@ -4,10 +4,7 @@ import BackgroundLogo from '../components/BackgroundLogo';
 
 const Landing = () => {
     return (
-        <>
-            <SignIn />
-            <BackgroundLogo />
-        </>
+        <BackgroundLogo />
     );
 };
 
