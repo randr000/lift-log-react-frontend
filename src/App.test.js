@@ -37,5 +37,8 @@ describe('Test app navigation', () => {
     const aboutBtn = screen.getByRole(/button/i, {name: "About"});
     await user.click(aboutBtn);
     expect(screen.getByRole(/heading/i, {text: /about*/i})).toBeInTheDocument();
+    const logoText = screen.getByTestId("logo-text");
+    await user.click(logoText);
+    expect(screen.getByAltText(/Background Image Logo/i)).toBeInTheDocument();
   });
 });

@@ -23,12 +23,13 @@ const SiteNavbar = () => {
     }
 
     return (
-        <Navbar expand="lg" className="bg-light" data-testid="site-navbar">
+        <Navbar expand="lg" className="bg-light">
             <Container fluid>
                 <Navbar.Brand
                     className="google-font-800 text-center fs-3 blue-logo-color"
                     style={{color: "#066AE1", cursor: "pointer"}}
                     onClick={() => navigate("/")}
+                    data-testid="logo-text"
                 >
                     liftlog
                 </Navbar.Brand>
