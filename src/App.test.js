@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
@@ -42,3 +42,33 @@ describe('Test app navigation', () => {
     expect(screen.getByAltText(/Background Image Logo/i)).toBeInTheDocument();
   });
 });
+
+// describe('Test user sign in and sign out', () => {
+
+//   const user = user.setup();
+
+//   test(`Test ${process.env.REACT_APP_TEST_LOGIN_EMAIL} can sign in and out`, async () => {
+//     renderApp();
+
+//     const signInBtn = screen.getByRole(/button/i, {name: /sign in/i});
+//     const singOutBtn = screen.getByRole(/button/i, {name: /sign out/i});
+
+//     await user.click(signInBtn);
+
+//     const emailInput = screen.getByLabelText(/email address/i);
+//     const passwordInput = screen.getByLabelText(/enter password/i);
+
+//     await user.type(emailInput, process.env.REACT_APP_TEST_LOGIN_EMAIL);
+//     await user.type(passwordInput, process.env.REACT_APP_TEST_LOGIN_PASSWORD);
+
+//     const signInForm = screen.getByRole(/form/i);
+//     const signInSubmitBtn = within(signInForm).getByRole(/button/i, {name: /sign in/i});
+
+//     await user.click(signInSubmitBtn);
+
+//     await waitFor(() => {
+//       expect(process.env.REACT_APP_TEST_FIREBASE_UID).toEqual()
+//     });
+   
+//   });
+// });

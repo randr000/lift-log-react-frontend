@@ -5,7 +5,7 @@ export const APP_INITIAL_STATE = {
     signInError: false,
     signedIn: false,
     user: false
-}
+};
 
 export const appReducer = (state, action) => {
 

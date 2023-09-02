@@ -22,7 +22,7 @@ const SignIn = () => {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                dispatch({type: APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL});
+                dispatch({type: APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL, payload: user});
                 console.log(user);
             })
             .catch((error) => {

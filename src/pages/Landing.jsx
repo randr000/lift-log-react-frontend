@@ -6,6 +6,7 @@ import BlueBackground from '../components/BlueBackground';
 const Landing = () => {
     return (
         <BlueBackground>
+            
             <BackgroundLogo />
         </BlueBackground>
     );
