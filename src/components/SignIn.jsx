@@ -11,7 +11,7 @@ import APP_ACTION_TYPES from '../action-types/app-action-types';
 const SignIn = () => {
 
     const {app_state, dispatch} = useContext(AppContext);
-    const {showSignIn, signInError} = app_state
+    const {showSignIn, signInError} = app_state;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
