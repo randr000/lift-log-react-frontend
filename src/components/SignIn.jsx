@@ -33,7 +33,7 @@ const SignIn = () => {
     };
 
     return (
-        <Modal show={showSignIn} onHide={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE, payload: false})}>
+        <Modal show={showSignIn} onHide={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: false})}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
@@ -53,7 +53,7 @@ const SignIn = () => {
                         <div>
                             <Button className="m-1" type="submit" variant="primary">Sign In</Button>
                             <Button className="m-1" variant="secondary" onClick={() => dispatch({
-                                    type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE,
+                                    type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL,
                                     payload: false
                                     })}
                             >

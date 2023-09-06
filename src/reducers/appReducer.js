@@ -14,7 +14,7 @@ export const appReducer = (state, action) => {
     const {type, payload} = action;
 
     switch(type) {
-        case APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE:
+        case APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL:
             return {...state, showSignIn: payload, signInError: false};
         case APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL:
             return {...state, showSignIn: false, signInError: false, signedIn: true, user: payload};

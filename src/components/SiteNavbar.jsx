@@ -41,7 +41,7 @@ const SiteNavbar = () => {
                         {
                             !signedIn && 
                             <Nav.Item className="m-2">
-                                <Button variant="primary" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODULE, payload: true})}>
+                                <Button variant="primary" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: true})}>
                                     Sign In
                                 </Button>
                             </Nav.Item>
