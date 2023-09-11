@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SignUp from './SignUp';
 import AppContext from '../contexts/AppContext';
 import { APP_INITIAL_STATE } from '../reducers/appReducer';
@@ -12,7 +12,7 @@ describe('All sign up modal elements load', () => {
                 <SignUp />
             </AppContext.Provider>
         );
-    }
+    };
 
     test('Sign Up title loads', () => {
         renderInitialLoad();
@@ -95,5 +95,46 @@ describe('All sign up modal elements do not load', () => {
         renderInitialLoad();
         const closeBtn = screen.queryByRole('button', {name: /cancel/i});
         expect(closeBtn).not.toBeInTheDocument();
+    });
+});
+
+describe('Email and password inputs update after input from keyboard', () => {
+
+    const state = {...APP_INITIAL_STATE, showSignUp: true};
+    const renderInitialLoad = () => {
+        render(
+            <AppContext.Provider value={{app_state: state, dispatch: () => {}}}>
+                <SignUp />
+            </AppContext.Provider>
+        );
+    };
+
+    const testInput = (component, text='') => {
+        fireEvent.change(component, {target: {value: text}});
+        expect(component.value).toBe(text);
+    };
+
+    test('Email address input updates correctly', () => {
+        renderInitialLoad();
+        const emailInput = screen.getByLabelText(/email address/i);
+        testInput(emailInput);
+        testInput(emailInput, 'test@test.com');
+        testInput(emailInput, '');
+    });
+
+    test('Password input updates correctly', () => {
+        renderInitialLoad();
+        const passwordInput = screen.getByLabelText(/^password$/i);
+        testInput(passwordInput);
+        testInput(passwordInput, 'asdk#2gdakl@');
+        testInput(passwordInput, '');
+    });
+
+    test('Confirm Password input updates correctly', () => {
+        renderInitialLoad();
+        const passwordInput = screen.getByLabelText(/^confirm password$/i);
+        testInput(passwordInput);
+        testInput(passwordInput, 'asdk#2gdakl@');
+        testInput(passwordInput, '');
     });
 });
