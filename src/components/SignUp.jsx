@@ -23,7 +23,7 @@ const SignUp = () => {
     return (
         <Modal show={showSignUp} onHide={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL, payload: false})}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Sign Up</Modal.Title>
+                    <Modal.Title data-testid="sign-up-title">Sign Up</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSignup}>
                     <Modal.Body>

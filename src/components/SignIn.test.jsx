@@ -39,7 +39,7 @@ describe('All sign in modal elements load', () => {
         expect(signInBtn).toBeInTheDocument();
     });
 
-    test('Close button loads', () => {
+    test('Cancel button loads', () => {
         renderInitialLoad();
         const closeBtn = screen.getByRole('button', {name: /cancel/i});
         expect(closeBtn).toBeInTheDocument();
