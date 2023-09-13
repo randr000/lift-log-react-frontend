@@ -1,4 +1,4 @@
-import React, { useReducer, useState,useEffect } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import AppContext from './contexts/AppContext';
 import SiteNavbar from './components/SiteNavbar';
 // import SignIn from './components/SignIn';
@@ -11,10 +11,15 @@ import { Navigate } from 'react-router-dom';
 function App() {
 
   const [app_state, dispatch] = useReducer(appReducer, APP_INITIAL_STATE);
+  const {user} = app_state;
 
-  const RequireAuth = ({children}) => {
-    return app_state.user ? children : <Navigate to="/" />;
-  };
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
+  // const RequireAuth = ({children}) => {
+  //   return app_state.user ? children : <Navigate to="/" />;
+  // };
 
   return (
     <div className="App">

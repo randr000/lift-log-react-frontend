@@ -6,7 +6,7 @@ export const APP_INITIAL_STATE = {
     showSignUp: false,
     signUpError: false,
     signedIn: false,
-    user: false
+    user: JSON.parse(localStorage.getItem('user')) || false
 };
 
 export const appReducer = (state, action) => {
