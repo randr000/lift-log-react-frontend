@@ -5,7 +5,7 @@ export const APP_INITIAL_STATE = {
     signInError: false,
     showSignUp: false,
     signUpError: false,
-    signedIn: false,
+    signedIn: JSON.parse(localStorage.getItem('user')) ? true : false,
     user: JSON.parse(localStorage.getItem('user')) || false
 };
 
