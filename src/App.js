@@ -13,6 +13,7 @@ function App() {
   const [app_state, dispatch] = useReducer(appReducer, APP_INITIAL_STATE);
   const {user} = app_state;
 
+  // Save user information to local storage so user stays logged in after page refreshes
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
