@@ -16,8 +16,8 @@ const ExerciseCard = () => {
         <Card className="mx-5 my-3" style={{width: '18rem'}}>
             <Card.Title className="ms-1 mt-1">Dumbbell Flye</Card.Title>
             <Accordion>
-                <Accordion.Item eventKey="0" onClick={handleAccordionClick}>
-                    <Accordion.Header>
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header onClick={handleAccordionClick}>
                         {isAccordionExpanded ? "Collapse" : "Expand"}
                     </Accordion.Header>
                     <Accordion.Body>
