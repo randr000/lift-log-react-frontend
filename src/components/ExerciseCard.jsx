@@ -9,6 +9,7 @@ const ExerciseCard = () => {
             <Card.Title className="ms-1 mt-1">Dumbbell Flye</Card.Title>
             <Accordion>
                 <Accordion.Item eventKey="0">
+                    <Accordion.Header>Expand</Accordion.Header>
                     <Accordion.Body>
                         <h1>Max Weight: 15 lbs. (Each Arm)</h1>
                     </Accordion.Body>
