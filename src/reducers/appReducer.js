@@ -6,7 +6,8 @@ export const APP_INITIAL_STATE = {
     showSignUp: false,
     signUpError: false,
     signedIn: JSON.parse(localStorage.getItem('user')) ? true : false,
-    user: JSON.parse(localStorage.getItem('user')) || false
+    user: JSON.parse(localStorage.getItem('user')) || false,
+    displayName: ''
 };
 
 export const appReducer = (state, action) => {
@@ -28,6 +29,8 @@ export const appReducer = (state, action) => {
             return {...state, showSignUp: false, signUpError: false, signedIn: true, user: payload};
         case APP_ACTION_TYPES.SIGN_UP_UNSUCCESSFUL:
             return {...state, signUpError: true, signedIn: false};
+        case APP_ACTION_TYPES.UPDATE_DISPLAY_NAME:
+            return {...state, displayName: payload}
         default: return state;
     }
 };
