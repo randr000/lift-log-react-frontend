@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import Modals from "./Modals";
 import Button from "react-bootstrap/Button";
 import { Router, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -26,8 +27,7 @@ const SiteNavbar = () => {
 
     return (
         <Navbar expand="lg" className="bg-light">
-            <SignIn />
-            <SignUp />
+            <Modals />
             <Container fluid>
                 <Navbar.Brand
                     className="google-font-800 text-center fs-3 blue-logo-color"

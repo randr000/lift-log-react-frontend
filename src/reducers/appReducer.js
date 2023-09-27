@@ -7,7 +7,8 @@ export const APP_INITIAL_STATE = {
     signUpError: false,
     signedIn: JSON.parse(localStorage.getItem('user')) ? true : false,
     user: JSON.parse(localStorage.getItem('user')) || false,
-    displayName: ''
+    displayName: '',
+    showAddExerciseForm: false
 };
 
 export const appReducer = (state, action) => {
@@ -30,7 +31,9 @@ export const appReducer = (state, action) => {
         case APP_ACTION_TYPES.SIGN_UP_UNSUCCESSFUL:
             return {...state, signUpError: true, signedIn: false};
         case APP_ACTION_TYPES.UPDATE_DISPLAY_NAME:
-            return {...state, displayName: payload}
+            return {...state, displayName: payload};
+        case APP_ACTION_TYPES.TOGGLE_ADD_EXERCISE_MODAL:
+            return {...state, showAddExerciseForm: payload};
         default: return state;
     }
 };

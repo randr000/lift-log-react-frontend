@@ -47,7 +47,6 @@ const SignIn = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
                         </Form.Group>
-                    
                     </Modal.Body>
                     <Modal.Footer className="d-flex flex-column">
                         <div>
