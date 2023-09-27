@@ -10,10 +10,6 @@ const AppRoutes = () => {
     const {app_state, dispatch} = useContext(AppContext);
     const {signedIn, user} = app_state;
 
-    useEffect(() => {
-        console.log(user.uid);
-    }, [user]);
-
     return (
         <Routes>
             <Route path="/" element={user ? <Home/> : <Landing/>} />
