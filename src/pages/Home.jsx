@@ -3,7 +3,7 @@ import AppContext from "../contexts/AppContext";
 import BlueBackground from "../components/BlueBackground";
 import AddExerciseCard from "../components/AddExerciseCard";
 import ExerciseCard from "../components/ExerciseCard";
-import { doc, getDoc, getDocs, onSnapshot, collection } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import APP_ACTION_TYPES from "../action-types/app-action-types";
 
@@ -24,30 +24,27 @@ const Home = () => {
             console.log(e.message);
         }
     }
-    
-    function fetchExerciseNames() {
-        try {
-            const unsubscribe = onSnapshot(collection(db, `users/${user.uid}/exercises`), (snapshot) => {
-                let docsArray = []
-                snapshot.docs.forEach(doc => docsArray.push(doc.id));
-                dispatch({type: APP_ACTION_TYPES.GET_EXERCISE_NAMES, payload: docsArray});
-            });
-            return () => unsubscribe();
-        } catch (e) {
-            console.log(e.message);
-        }
-    }
 
     useEffect(() => {
         fetchDisplayName();
-        fetchExerciseNames();
     }, [user]);
 
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, `users/${user.uid}/exercises`), snapshot => {
+            dispatch({
+                type: APP_ACTION_TYPES.GET_EXERCISE_NAMES,
+                payload: snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
+            });
+        });
+
+        return unsub;
+    }, []);
+
     return (
-        <BlueBackground>
+        <BlueBackground >
             <h1 className="google-font-800 text-white text-center mt-5 fs-1">{`Welcome back, ${displayName}!`}</h1>
             <AddExerciseCard/>
-            {exercises.map(exercise => <ExerciseCard key={exercise} name={exercise} />)}
+            {exercises.map(exercise => <ExerciseCard key={exercise.id} name={exercise.name} />)}
         </BlueBackground>
     );
 };

@@ -4,7 +4,7 @@ import APP_ACTION_TYPES from "../action-types/app-action-types";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 
 const AddExerciseFormModal = () => {
@@ -15,11 +15,13 @@ const AddExerciseFormModal = () => {
     const [exerciseName, setExerciseName] = useState('');
     const [exerciseNotes, setExerciseNotes] = useState('');
 
-    async function handleAddExercise() {
+    async function handleAddExercise(event) {
+        event.preventDefault();
         try {
-            await setDoc(doc(db, `users/${user.uid}/exercises`, exerciseName), {
-                notes: exerciseNotes
-            });
+            const collectionRef = collection(db, `users/${user.uid}/exercises`);
+            const payload = {name: exerciseName, notes: exerciseNotes};
+            await addDoc(collectionRef, payload);
+            dispatch({type: APP_ACTION_TYPES.TOGGLE_ADD_EXERCISE_MODAL, payload: false})
         } catch (e) {
             console.log(e.message);
         }

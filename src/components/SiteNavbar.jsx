@@ -26,7 +26,7 @@ const SiteNavbar = () => {
     }
 
     return (
-        <Navbar expand="lg" className="bg-light">
+        <Navbar expand="lg" className="bg-light" style={{height: "7vh"}}>
             <Modals />
             <Container fluid>
                 <Navbar.Brand
