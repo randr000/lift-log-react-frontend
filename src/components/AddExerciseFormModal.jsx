@@ -40,7 +40,7 @@ const AddExerciseFormModal = () => {
                         payload: false
                     })}
                     >
-                        Cabcel
+                        Cancel
                     </Button>
                 </Modal.Footer>
             </Form>
