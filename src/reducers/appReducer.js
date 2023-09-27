@@ -9,6 +9,7 @@ export const APP_INITIAL_STATE = {
     user: JSON.parse(localStorage.getItem('user')) || false,
     displayName: '',
     showAddExerciseForm: false,
+    showViewSetsModal: false,
     exercises: []
 };
 
@@ -35,6 +36,8 @@ export const appReducer = (state, action) => {
             return {...state, displayName: payload};
         case APP_ACTION_TYPES.TOGGLE_ADD_EXERCISE_MODAL:
             return {...state, showAddExerciseForm: payload};
+        case APP_ACTION_TYPES.TOGGLE_VIEW_SETS_MODAL:
+            return {...state, showViewSetsModal: payload}
         case APP_ACTION_TYPES.GET_EXERCISE_NAMES:
             return {...state, exercises: payload};
         default: return state;
