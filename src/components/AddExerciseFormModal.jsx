@@ -4,17 +4,25 @@ import APP_ACTION_TYPES from "../action-types/app-action-types";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const AddExerciseFormModal = () => {
 
     const {app_state, dispatch} = useContext(AppContext);
-    const {showAddExerciseForm} = app_state;
+    const {user, showAddExerciseForm} = app_state;
 
     const [exerciseName, setExerciseName] = useState('');
     const [exerciseNotes, setExerciseNotes] = useState('');
 
     async function handleAddExercise() {
-
+        try {
+            await setDoc(doc(db, `users/${user.uid}/exercises`, exerciseName), {
+                notes: exerciseNotes
+            });
+        } catch (e) {
+            console.log(e.message);
+        }
     }
 
     return (
