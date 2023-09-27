@@ -23,13 +23,13 @@ const ExerciseCard = ({id, name}) => {
 
     return (
         <Card className="mx-5 my-3" style={{width: '18rem'}}>
-            <Card.Title className="ms-1 mt-1" onClick={handleViewSetsClick}>{name}</Card.Title>
+            <Card.Title className="ms-1 mt-1" onClick={handleViewSetsClick} style={{cursor: "pointer"}}>{name}</Card.Title>
             <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header onClick={handleAccordionClick}>
                         {isAccordionExpanded ? "Collapse" : "Expand"}
                     </Accordion.Header>
-                    <Accordion.Body onClick={handleViewSetsClick}>
+                    <Accordion.Body onClick={handleViewSetsClick} style={{cursor: "pointer"}}>
                         <h1>Max Weight: 15 lbs. (Each Arm)</h1>
                     </Accordion.Body>
                 </Accordion.Item>
