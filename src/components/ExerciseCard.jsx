@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import { useState } from 'react';
 
-const ExerciseCard = () => {
+const ExerciseCard = ({name}) => {
 
     const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
 
@@ -14,7 +14,7 @@ const ExerciseCard = () => {
 
     return (
         <Card className="mx-5 my-3" style={{width: '18rem'}}>
-            <Card.Title className="ms-1 mt-1">Dumbbell Flye</Card.Title>
+            <Card.Title className="ms-1 mt-1">{name}</Card.Title>
             <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header onClick={handleAccordionClick}>
