@@ -5,7 +5,7 @@ import backgroundImg from '../img/liftlog-logos.jpeg';
 const BackgroundLogo = () => {
     return (
         <div className="text-center">
-            <Image src={`${backgroundImg}`} className="text-center" alt="Background Image Logo" style={{height: "100vh"}} />
+            <Image src={`${backgroundImg}`} className="text-center" alt="Background Image Logo" style={{height: "100vh"}} fluid/>
         </div>
     );
 };
