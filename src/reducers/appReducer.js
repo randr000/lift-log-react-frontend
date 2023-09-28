@@ -37,7 +37,9 @@ export const appReducer = (state, action) => {
         case APP_ACTION_TYPES.TOGGLE_ADD_EXERCISE_MODAL:
             return {...state, showAddExerciseForm: payload};
         case APP_ACTION_TYPES.TOGGLE_VIEW_SETS_MODAL:
-            return {...state, showViewSetsModal: payload}
+            return {...state, showViewSetsModal: payload};
+        case APP_ACTION_TYPES.DONE_EDITING_NOTES:
+            return {...state, showViewSetsModal: {...state.showViewSetsModal, exerciseNotes: payload}};
         case APP_ACTION_TYPES.GET_EXERCISE_NAMES:
             return {...state, exercises: payload};
         default: return state;

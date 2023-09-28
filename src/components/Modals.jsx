@@ -10,7 +10,7 @@ const Modals = () => {
             <SignIn/>
             <SignUp/>
             <AddExerciseFormModal/>
-            <ViewSetsModal/>
+            {/* <ViewSetsModal/> */}
         </>
     );
 };
