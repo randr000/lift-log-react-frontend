@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Modals from "./Modals";
@@ -17,13 +17,23 @@ const SiteNavbar = () => {
 
     const {app_state, dispatch} = useContext(AppContext);
 
+    const [showOffcanvas, setShowOffcanvas] = useState(false);
+
     const navigate = useNavigate();
 
     const {signedIn, user} = app_state;
 
-    const handleSignOut = () => {
+    function handleSignOut() {
         signOut(auth);
         dispatch({type: APP_ACTION_TYPES.SIGN_OUT})
+    }
+
+    function handleShowOffCanvas() {
+        setShowOffcanvas(true);
+    }
+
+    function handleHideOffcanvas() {
+        setShowOffcanvas(false);
     }
 
     return (
@@ -38,8 +48,8 @@ const SiteNavbar = () => {
                 >
                     liftlog
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Offcanvas placement="top">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleShowOffCanvas}/>
+                <Navbar.Offcanvas show={showOffcanvas} onHide={handleHideOffcanvas} placement="top">
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title />
                     </Offcanvas.Header>
@@ -61,7 +71,7 @@ const SiteNavbar = () => {
                             }
                             {signedIn && <Nav.Item className="m-lg-2 my-1"><Button variant="primary" onClick={handleSignOut}>Sign Out</Button></Nav.Item>}
                             <Nav.Item className="m-lg-2 my-1">
-                                <Button variant="primary" onClick={() => navigate("/about")}>About</Button>
+                                <Button variant="primary" onClick={() => {navigate("/about"); handleHideOffcanvas();}}>About</Button>
                             </Nav.Item>
                         </Nav>
                     </Offcanvas.Body>
