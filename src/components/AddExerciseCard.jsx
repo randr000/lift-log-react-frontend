@@ -10,7 +10,7 @@ const AddExerciseCard = () => {
     const {showAddExerciseForm} = app_state;
     
     return (
-        <Card className="mx-5 my-3" style={{width: '18rem'}}>
+        <Card className="mx-5 my-3 align-self-start" style={{width: '18rem'}}>
             <Card.Title className="ms-1 mt-1">Add Exercise</Card.Title>
                 <Badge
                     pill bg="primary"

@@ -51,7 +51,7 @@ const ExerciseCard = ({id}) => {
     return (
         <>
 
-            <Card className="mx-5 my-3" style={{width: '18rem'}}>
+            <Card className="mx-5 my-3 align-self-start" style={{width: '18rem'}}>
                 <Card.Title className="ms-1 mt-1" onClick={handleViewSetsClick} style={{cursor: "pointer"}}>{exerciseDoc.name}</Card.Title>
                 <Accordion>
                     <Accordion.Item eventKey="0">
