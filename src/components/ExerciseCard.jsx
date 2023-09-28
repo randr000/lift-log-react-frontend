@@ -80,7 +80,7 @@ const ExerciseCard = ({id}) => {
                         editNotes ?
                         <>
                             <Form>
-                                <Form.Control as="textarea" className="mb-2" value={draftNotes} onChange={(e) => setDraftNotes(e.target.value)} />
+                                <Form.Control as="textarea" className="mb-2" value={draftNotes || exerciseDoc.notes} onChange={(e) => setDraftNotes(e.target.value)} />
                             </Form>
                             <Button variant="warning" onClick={() => handleDoneEditNotes(draftNotes)}>Done Editing</Button>
                         </> :
