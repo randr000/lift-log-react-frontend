@@ -29,9 +29,12 @@ const ViewSetsModal = () => {
 
         const [notes, setNotes] = useState(exerciseNotes)
         return (
-            <Form>
-                <Form.Control as="textarea" className="mb-2" value={notes} onChange={(e) => setNotes(e.target.value)} />
-            </Form>
+            <>
+                <Form>
+                    <Form.Control as="textarea" className="mb-2" value={notes} onChange={(e) => setNotes(e.target.value)} />
+                </Form>
+                <Button variant="warning" onClick={handleDoneEditNotes}>Done Editing</Button>
+            </>
         );
     };
 
@@ -46,7 +49,7 @@ const ViewSetsModal = () => {
                     editNotes?
                     <>
                         <EditNotesForm/>
-                        <Button variant="warning" onClick={handleDoneEditNotes}>Done Editing</Button>
+                        
                     </>:
                     <>
                         <p className="google-font-400">{exerciseNotes}</p>
