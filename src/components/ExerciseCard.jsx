@@ -33,8 +33,6 @@ const ExerciseCard = ({id}) => {
     }
 
     function handleViewSetsClick() {
-        // dispatch({type: APP_ACTION_TYPES.TOGGLE_VIEW_SETS_MODAL, payload: {
-        //     show: true, exerciseId: id, exerciseName: exerciseDoc.name, exerciseNotes: exerciseDoc.notes}});
         setShowSets(true);
     }
 
@@ -43,9 +41,6 @@ const ExerciseCard = ({id}) => {
     }
 
     async function handleDoneEditNotes(editedNotes) {
-        // dispatch({type: APP_ACTION_TYPES.TOGGLE_VIEW_SETS_MODAL, payload: {
-        //     show: true, exerciseId: id, exerciseName: exerciseDoc.name, exerciseNotes: editedNotes}});
-        // setExerciseDoc(state => ({...state, notes: editedNotes}));
         const docRef = doc(db, `users/${user.uid}/exercises`,`${id}`);
         const payload = {notes: editedNotes};
         await updateDoc(docRef, payload);

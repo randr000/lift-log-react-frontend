@@ -2,7 +2,6 @@ import React from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import AddExerciseFormModal from "./AddExerciseFormModal";
-import ViewSetsModal from "./ViewSetsModal";
 
 const Modals = () => {
     return (
@@ -10,7 +9,6 @@ const Modals = () => {
             <SignIn/>
             <SignUp/>
             <AddExerciseFormModal/>
-            {/* <ViewSetsModal/> */}
         </>
     );
 };
