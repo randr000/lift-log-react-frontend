@@ -28,7 +28,7 @@ const ExerciseCard = ({id}) => {
     const [allRepsValue, setAllRepsValue] = useState('');
     const [allWeightValue, setAllWeightValue] = useState('');
     const [submitAddSetsError, setSubmitAddSetsError] = useState(false);
-    const [sets, setSets] = useState({});
+    const [sets, setSets] = useState([]);
     const [date, setDate] = useState(0);
 
 
@@ -39,12 +39,12 @@ const ExerciseCard = ({id}) => {
         return unsub;
     }, []);
 
-    // useEffect(() => {
-    //     const unsub = onSnapshot(collection(db, `users/${user.uid}/exercises/${id}/sets`), snapshot => {
-    //         setSets(snapshot.docs.map(doc => doc.data()));
-    //     });
-    //     return unsub;
-    // }, []);
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, `users/${user.uid}/exercises/${id}/sets`), snapshot => {
+            setSets(snapshot.docs.map(doc => ({...doc.data(), dateStr: doc.id, dateStamp: Date.parse(doc.id)})));
+        });
+        return unsub;
+    }, []);
 
     function handleAccordionClick() {
         setIsAccordionExpanded(state => !state);
@@ -262,6 +262,35 @@ const ExerciseCard = ({id}) => {
                             {submitAddSetsError && <p className="text-danger fw-bold fs-5 my-2">{submitAddSetsError}</p>}
                         </Form>
                     }
+                   {
+                        sets.sort((a, b) => b.dateStamp - a.dateStamp).map((dailySets) => {
+                            return (
+                                <div key={dailySets.dateStr}>
+                                    <hr/>
+                                    <p className="google-font-800 text-center">{dailySets.dateStr}</p>
+                                    <div className="d-flex justify-content-center">
+                                        <Button variant="info" className="me-4" onClick={() => {}}>Edit Sets</Button>
+                                        <Button variant="danger" className="ms-4" onClick={() => {}}>Delete Sets</Button>
+                                    </div>
+                                    <div className="d-flex justify-content-evenly">
+                                        <p className="google-font-500 text-decoration-underline">Reps</p>
+                                        <p className="google-font-500 text-decoration-underline">Weight</p>
+                                    </div>
+                                    {
+                                        dailySets[0].map((set, idx) => {
+                                            return (
+                                                <div key={idx} className="d-flex justify-content-evenly">
+                                                    <p className="google-font-400">{set.reps}</p>
+                                                    <p className="google-font-400">{set.weight}</p>
+                                                </div>
+                                            );
+                                        })
+                                    }
+                                </div>
+                                
+                            );
+                        })
+                   }
                 </Modal.Body>
             </Modal>
 
