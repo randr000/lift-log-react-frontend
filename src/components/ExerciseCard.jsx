@@ -5,7 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import { useState, useEffect, useContext } from 'react';
 import AppContext from '../contexts/AppContext';
 import APP_ACTION_TYPES from '../action-types/app-action-types';
-import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -27,6 +27,7 @@ const ExerciseCard = ({id}) => {
     const [repLinesFormInput, setRepLinesFormInput] = useState([]);
     const [allRepsValue, setAllRepsValue] = useState('');
     const [allWeightValue, setAllWeightValue] = useState('');
+    const [submitAddSetsError, setSubmitAddSetsError] = useState(false);
     const [sets, setSets] = useState({});
     const [date, setDate] = useState(0);
 
@@ -38,12 +39,12 @@ const ExerciseCard = ({id}) => {
         return unsub;
     }, []);
 
-    useEffect(() => {
-        const unsub = onSnapshot(collection(db, `users/${user.uid}/exercises/${id}/sets`), snapshot => {
-            setSets(snapshot.docs.map(doc => doc.data()));
-        });
-        return unsub;
-    }, []);
+    // useEffect(() => {
+    //     const unsub = onSnapshot(collection(db, `users/${user.uid}/exercises/${id}/sets`), snapshot => {
+    //         setSets(snapshot.docs.map(doc => doc.data()));
+    //     });
+    //     return unsub;
+    // }, []);
 
     function handleAccordionClick() {
         setIsAccordionExpanded(state => !state);
@@ -84,7 +85,28 @@ const ExerciseCard = ({id}) => {
     }
 
     function handleSubmitAddSetForm() {
-        setShowAddSetForm(false);
+        try {
+            if (!date) {
+                setSubmitAddSetsError('You must select a date before submitting!');
+                return;
+            } else setSubmitAddSetsError(false);
+
+            if (!repLinesFormInput.length) {
+                setSubmitAddSetsError('You must add at least one set before submitting!');
+                return;
+            } else {
+                const payload = {...[repLinesFormInput.filter(set => set.reps && set)], date: date};
+                const docRef = doc(db, `users/${user.uid}/exercises/${id}/sets`, date);
+                setDoc(docRef, payload, {merge: true});
+                setSubmitAddSetsError(false);
+                setDate(false);
+                setRepLinesFormInput([]);
+            }
+
+            setShowAddSetForm(false);
+        } catch (e) {
+            setSubmitAddSetsError(e.message);
+        }
     }
 
     function handleHideAddSetForm() {
@@ -196,7 +218,7 @@ const ExerciseCard = ({id}) => {
                         <Form>
                             <Form.Group>
                                 <Form.Label>Date:</Form.Label>
-                                <Form.Control className="w-50 w-sm-25" type="date" onChange={e => handleDateChange(e)}/>
+                                <Form.Control className="w-50 w-sm-25" type="date" value={date} onChange={e => handleDateChange(e)}/>
                             </Form.Group>
                             <div className="d-flex flex-row mt-2">
                                 <Form.Group>
@@ -237,7 +259,7 @@ const ExerciseCard = ({id}) => {
                                             </Badge>
                                     </div>
                             )})}
-    
+                            {submitAddSetsError && <p className="text-danger fw-bold fs-5 my-2">{submitAddSetsError}</p>}
                         </Form>
                     }
                 </Modal.Body>
