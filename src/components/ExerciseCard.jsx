@@ -84,9 +84,21 @@ const ExerciseCard = ({id}) => {
     }
 
     function handleDeleteRepLine(idx, event) {
-        const arr = [...repLinesFormInput]
+        const arr = [...repLinesFormInput];
         arr.splice(idx, 1);
         setRepLinesFormInput(arr);
+    }
+
+    function handleUpdateAllReps(value) {
+        setRepLinesFormInput(prev => {
+            return prev.map(row => ({...row, reps: value}));
+        });
+    }
+
+    function handleUpdateAllWeight(value) {
+        setRepLinesFormInput(prev => {
+            return prev.map(row => ({...row, weight: value}));
+        });
     }
 
     return (
@@ -155,11 +167,11 @@ const ExerciseCard = ({id}) => {
                             <div className="d-flex flex-row mt-2">
                                 <Form.Group>
                                     <Form.Label>Update All Reps:</Form.Label>
-                                    <Form.Control className="w-50" type="number" />
+                                    <Form.Control className="w-50" type="number" onChange={e => handleUpdateAllReps(e.target.value)}/>
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label>Update All Weight:</Form.Label>
-                                    <Form.Control className="w-50" type="number" />
+                                    <Form.Control className="w-50" type="number" onChange={e => handleUpdateAllWeight(e.target.value)}/>
                                 </Form.Group>
                                     <Badge
                                         pill bg="success"
