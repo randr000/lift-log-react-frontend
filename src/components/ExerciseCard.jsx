@@ -28,6 +28,7 @@ const ExerciseCard = ({id}) => {
     const [allRepsValue, setAllRepsValue] = useState('');
     const [allWeightValue, setAllWeightValue] = useState('');
     const [sets, setSets] = useState({});
+    const [date, setDate] = useState(0);
 
 
     useEffect(() => {
@@ -82,6 +83,10 @@ const ExerciseCard = ({id}) => {
         setShowAddSetForm(true);
     }
 
+    function handleSubmitAddSetForm() {
+        setShowAddSetForm(false);
+    }
+
     function handleHideAddSetForm() {
         setShowAddSetForm(false);
     }
@@ -117,6 +122,10 @@ const ExerciseCard = ({id}) => {
             return prev.map(row => ({...row, weight: value}));
         });
         setAllWeightValue(value);
+    }
+
+    function handleDateChange(event) {
+        setDate(event.target.value);
     }
 
     return (
@@ -177,7 +186,7 @@ const ExerciseCard = ({id}) => {
                         {
                             showAddSetForm &&
                             <div>
-                                <Button className="ms-2" variant="success" onClick={handleHideAddSetForm}>Done</Button>
+                                <Button className="ms-2" variant="success" onClick={handleSubmitAddSetForm}>Done</Button>
                                 <Button className="ms-2" variant="danger" onClick={handleHideAddSetForm}>Cancel</Button>
                             </div>
                         }
@@ -187,7 +196,7 @@ const ExerciseCard = ({id}) => {
                         <Form>
                             <Form.Group>
                                 <Form.Label>Date:</Form.Label>
-                                <Form.Control className="w-50 w-sm-25" type="date" />
+                                <Form.Control className="w-50 w-sm-25" type="date" onChange={e => handleDateChange(e)}/>
                             </Form.Group>
                             <div className="d-flex flex-row mt-2">
                                 <Form.Group>
