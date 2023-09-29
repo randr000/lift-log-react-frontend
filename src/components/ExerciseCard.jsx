@@ -45,7 +45,6 @@ const ExerciseCard = ({id}) => {
         const payload = {notes: editedNotes};
         await updateDoc(docRef, payload);
         setEditNotes(false);
-        console.log('ran')
     }
 
     return (
