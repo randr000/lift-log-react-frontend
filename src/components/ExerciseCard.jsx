@@ -25,6 +25,8 @@ const ExerciseCard = ({id}) => {
     const [draftNotes, setDraftNotes] = useState('');
     const [showAddSetForm, setShowAddSetForm] = useState(false);
     const [repLinesFormInput, setRepLinesFormInput] = useState([]);
+    const [allRepsValue, setAllRepsValue] = useState('');
+    const [allWeightValue, setAllWeightValue] = useState('');
 
 
     useEffect(() => {
@@ -73,7 +75,9 @@ const ExerciseCard = ({id}) => {
     }
 
     function handleAddRepLine() {
-        setRepLinesFormInput(prev => [...prev, {reps: '', weight: ''}]);
+        setRepLinesFormInput(prev => [...prev, {
+            reps: allRepsValue,
+            weight: allWeightValue}]);
     }
 
     function handleEditRepLine(idx, event) {
@@ -93,12 +97,14 @@ const ExerciseCard = ({id}) => {
         setRepLinesFormInput(prev => {
             return prev.map(row => ({...row, reps: value}));
         });
+        setAllRepsValue(value);
     }
 
     function handleUpdateAllWeight(value) {
         setRepLinesFormInput(prev => {
             return prev.map(row => ({...row, weight: value}));
         });
+        setAllWeightValue(value);
     }
 
     return (
