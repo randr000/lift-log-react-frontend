@@ -9,6 +9,7 @@ import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Badge from 'react-bootstrap/Badge';
 
 const ExerciseCard = ({id}) => {
 
@@ -22,6 +23,9 @@ const ExerciseCard = ({id}) => {
     const [draftName, setDraftName] = useState('');
     const [editNotes, setEditNotes] = useState(false);
     const [draftNotes, setDraftNotes] = useState('');
+    const [showAddSetForm, setShowAddSetForm] = useState(false);
+    const [repLinesFormInput, setRepLinesFormInput] = useState([]);
+
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, `users/${user.uid}/exercises/${id}`), doc => {
@@ -62,6 +66,27 @@ const ExerciseCard = ({id}) => {
             await updateDoc(docRef, payload);
         }
         setEditName(false);
+    }
+
+    function handleShowAddSetForm() {
+        setShowAddSetForm(true);
+    }
+
+    function handleAddRepLine() {
+        setRepLinesFormInput(prev => [...prev, {reps: '', weight: ''}]);
+    }
+
+    function handleEditRepLine(idx, event) {
+        const {name, value} = event.target;
+        const arr = [...repLinesFormInput];
+        arr[idx][name] = value;
+        setRepLinesFormInput(arr);
+    }
+
+    function handleDeleteRepLine(idx, event) {
+        const arr = [...repLinesFormInput]
+        arr.splice(idx, 1);
+        setRepLinesFormInput(arr);
     }
 
     return (
@@ -116,7 +141,59 @@ const ExerciseCard = ({id}) => {
                         </>
                     }
                     <hr></hr>
-                    <p className="google-font-800">Sets:</p>
+                    <div className="d-flex flex-row">
+                        <p className="google-font-800">Sets:</p>
+                        <Button className="ms-2" variant="primary" onClick={handleShowAddSetForm}>Add Sets</Button>
+                    </div>
+                    {
+                        showAddSetForm &&
+                        <Form>
+                            <Form.Group>
+                                <Form.Label>Date:</Form.Label>
+                                <Form.Control className="w-50 w-sm-25" type="date" />
+                            </Form.Group>
+                            <div className="d-flex flex-row mt-2">
+                                <Form.Group>
+                                    <Form.Label>Update All Reps:</Form.Label>
+                                    <Form.Control className="w-50" type="number" />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Update All Weight:</Form.Label>
+                                    <Form.Control className="w-50" type="number" />
+                                </Form.Group>
+                                    <Badge
+                                        pill bg="success"
+                                        className="google-font-100 text-white fs-4 w-25 align-self-center mb-1 display"
+                                        role="button"
+                                        onClick={handleAddRepLine}
+                                    >
+                                        +
+                                    </Badge>
+                            </div>
+                            {repLinesFormInput.map((data, idx) => {
+                                return (
+                                    <div key={idx} className="d-flex flex-row mt-2">
+                                        <Form.Group>
+                                            <Form.Label>Reps:</Form.Label>
+                                            <Form.Control className="w-50" type="number" name="reps" value={data.reps} onChange={(e) => handleEditRepLine(idx, e)}/>
+                                        </Form.Group>
+                                        <Form.Group>
+                                            <Form.Label>Weight:</Form.Label>
+                                            <Form.Control className="w-50" type="number" name="weight" value={data.weight} onChange={(e) => handleEditRepLine(idx, e)}/>
+                                        </Form.Group>
+                                            <Badge
+                                                pill bg="danger"
+                                                className="google-font-100 text-white fs-4 w-25 align-self-center mb-1 display"
+                                                role="button"
+                                                onClick={(e) => handleDeleteRepLine(idx, e)}
+                                            >
+                                                -
+                                            </Badge>
+                                    </div>
+                            )})}
+    
+                        </Form>
+                    }
                 </Modal.Body>
             </Modal>
 
