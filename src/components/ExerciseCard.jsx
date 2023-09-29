@@ -5,7 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import { useState, useEffect, useContext } from 'react';
 import AppContext from '../contexts/AppContext';
 import APP_ACTION_TYPES from '../action-types/app-action-types';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -27,11 +27,19 @@ const ExerciseCard = ({id}) => {
     const [repLinesFormInput, setRepLinesFormInput] = useState([]);
     const [allRepsValue, setAllRepsValue] = useState('');
     const [allWeightValue, setAllWeightValue] = useState('');
+    const [sets, setSets] = useState({});
 
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, `users/${user.uid}/exercises/${id}`), doc => {
             setExerciseDoc(doc.data());
+        });
+        return unsub;
+    }, []);
+
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, `users/${user.uid}/exercises/${id}/sets`), snapshot => {
+            setSets(snapshot.docs.map(doc => doc.data()));
         });
         return unsub;
     }, []);
@@ -72,6 +80,10 @@ const ExerciseCard = ({id}) => {
 
     function handleShowAddSetForm() {
         setShowAddSetForm(true);
+    }
+
+    function handleHideAddSetForm() {
+        setShowAddSetForm(false);
     }
 
     function handleAddRepLine() {
@@ -161,7 +173,14 @@ const ExerciseCard = ({id}) => {
                     <hr></hr>
                     <div className="d-flex flex-row">
                         <p className="google-font-800">Sets:</p>
-                        <Button className="ms-2" variant="primary" onClick={handleShowAddSetForm}>Add Sets</Button>
+                        {!showAddSetForm && <Button className="ms-2" variant="primary" onClick={handleShowAddSetForm}>Add Sets</Button>}
+                        {
+                            showAddSetForm &&
+                            <div>
+                                <Button className="ms-2" variant="success" onClick={handleHideAddSetForm}>Done</Button>
+                                <Button className="ms-2" variant="danger" onClick={handleHideAddSetForm}>Cancel</Button>
+                            </div>
+                        }
                     </div>
                     {
                         showAddSetForm &&
