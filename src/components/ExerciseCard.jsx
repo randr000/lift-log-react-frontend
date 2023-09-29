@@ -18,8 +18,10 @@ const ExerciseCard = ({id}) => {
     const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
     const [exerciseDoc, setExerciseDoc] = useState({});
     const [showSets, setShowSets] = useState(false);
+    const [editName, setEditName] = useState(false);
+    const [draftName, setDraftName] = useState('');
     const [editNotes, setEditNotes] = useState(false);
-    const [draftNotes, setDraftNotes] = useState(exerciseDoc.notes);
+    const [draftNotes, setDraftNotes] = useState('');
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, `users/${user.uid}/exercises/${id}`), doc => {
@@ -40,11 +42,26 @@ const ExerciseCard = ({id}) => {
         setEditNotes(true);
     }
 
+    function handleEditName() {
+        setEditName(true);
+    }
+
     async function handleDoneEditNotes(editedNotes) {
-        const docRef = doc(db, `users/${user.uid}/exercises`,`${id}`);
-        const payload = {notes: editedNotes};
-        await updateDoc(docRef, payload);
+        if (editedNotes) {
+            const docRef = doc(db, `users/${user.uid}/exercises`,`${id}`);
+            const payload = {notes: editedNotes};
+            await updateDoc(docRef, payload);
+        }
         setEditNotes(false);
+    }
+
+    async function handleDoneEditName(editedName) {
+        if (editedName) {
+            const docRef = doc(db, `users/${user.uid}/exercises`, `${id}`);
+            const payload = {name: editedName};
+            await updateDoc(docRef, payload);
+        }
+        setEditName(false);
     }
 
     return (
@@ -66,7 +83,22 @@ const ExerciseCard = ({id}) => {
 
             <Modal show={showSets} onHide={() => setShowSets(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{exerciseDoc.name}</Modal.Title>
+                    
+                    {
+                        editName ?
+                        <>
+                            <Modal.Title>
+                                <Form>
+                                    <Form.Control type="text" className="mb-2" value={draftName || exerciseDoc.name} onChange={(e) => setDraftName(e.target.value)} />
+                                </Form>
+                            </Modal.Title>
+                            <Button className="ms-2" variant="warning" onClick={() => handleDoneEditName(draftName)}>Done Editing</Button>
+                        </> :
+                        <>
+                            <Modal.Title>{exerciseDoc.name}</Modal.Title>
+                            <Button className="ms-2" variant="info" onClick={handleEditName}>Edit Name</Button>
+                        </>
+                    }
                 </Modal.Header>
                 <Modal.Body>
                     <p className="google-font-800">Exercise Notes:</p>
