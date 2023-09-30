@@ -6,6 +6,7 @@ import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import EditSetModal from "./EditSetModal";
 import ForgotPasswordModal from "./ForgotPasswordModal";
 import AccountSettingsModal from "./AccountSettingsModal";
+import PasswordResetModal from "./PasswordResetModal";
 import AppContext from "../../contexts/AppContext";
 
 const Modals = () => {
@@ -14,7 +15,8 @@ const Modals = () => {
     const {
         showEditSetModal,
         showForgotPasswordModal,
-        showAccountSettingsModal
+        showAccountSettingsModal,
+        showPasswordResetModal
     } = appState;
 
     return (
@@ -26,6 +28,7 @@ const Modals = () => {
             {showEditSetModal && <EditSetModal/>}
             {showForgotPasswordModal && <ForgotPasswordModal/>}
             {showAccountSettingsModal && <AccountSettingsModal/>}
+            {showPasswordResetModal && <PasswordResetModal/>}
         </>
     );
 };

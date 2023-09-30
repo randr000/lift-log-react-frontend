@@ -23,7 +23,7 @@ const SiteNavbar = () => {
 
     function handleSignOut() {
         signOut(auth);
-        dispatch({type: APP_ACTION_TYPES.SIGN_OUT})
+        dispatch({type: APP_ACTION_TYPES.SIGN_OUT});
     }
 
     function handleShowOffCanvas() {

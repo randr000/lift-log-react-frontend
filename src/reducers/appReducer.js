@@ -14,6 +14,7 @@ export const APP_INITIAL_STATE = {
     showEditSetModal: false,
     showForgotPasswordModal: false,
     showAccountSettingsModal: false,
+    showPasswordResetModal: false,
     exercises: []
 };
 
@@ -52,6 +53,8 @@ export const appReducer = (state, action) => {
             return {...state, showForgotPasswordModal: payload, showSignIn: false, signInError: false};
         case APP_ACTION_TYPES.TOGGLE_ACCOUNT_SETTINGS_MODAL:
             return {...state, showAccountSettingsModal: payload};
+        case APP_ACTION_TYPES.TOGGLE_PASSWORD_RESET_MODAL:
+            return {...state, showPasswordResetModal: payload};
         case APP_ACTION_TYPES.GET_EXERCISE_NAMES:
             return {...state, exercises: payload};
         default: return state;
