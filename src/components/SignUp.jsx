@@ -20,8 +20,12 @@ const SignUp = () => {
         event.preventDefault();
     };
 
+    function handleOnHide() {
+        dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL, payload: false})
+    }
+
     return (
-        <Modal show={showSignUp} onHide={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL, payload: false})}>
+        <Modal show={showSignUp} onHide={handleOnHide}>
                 <Modal.Header closeButton>
                     <Modal.Title data-testid="sign-up-title">Sign Up</Modal.Title>
                 </Modal.Header>

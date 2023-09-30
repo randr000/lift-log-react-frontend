@@ -5,7 +5,6 @@ import { auth } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { setUserProperties } from 'firebase/analytics';
 import APP_ACTION_TYPES from '../action-types/app-action-types';
 
 const SignIn = () => {
@@ -16,7 +15,7 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = (event) => {
+    function handleLogin(event) {
         event.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -32,8 +31,12 @@ const SignIn = () => {
             });
     };
 
+    function handleOnHide() {
+        dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: false})
+    }
+
     return (
-        <Modal show={showSignIn} onHide={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: false})}>
+        <Modal show={showSignIn} onHide={handleOnHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
                 </Modal.Header>
