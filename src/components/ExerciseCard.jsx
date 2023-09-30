@@ -96,7 +96,7 @@ const ExerciseCard = ({id}) => {
                 setSubmitAddSetsError('You must add at least one set before submitting!');
                 return;
             } else {
-                const payload = {...[repLinesFormInput.filter(set => set.reps && set)], date: date};
+                const payload = {sets: repLinesFormInput.filter(set => set.reps && set), date: date};
                 const docRef = doc(db, `users/${user.uid}/exercises/${id}/sets`, date);
                 await setDoc(docRef, payload, {merge: true});
                 setSubmitAddSetsError(false);
@@ -114,7 +114,7 @@ const ExerciseCard = ({id}) => {
         const collection = `users/${user.uid}/exercises/${id}/sets`;
         dispatch({
             type: APP_ACTION_TYPES.TOGGLE_EDIT_SET_MODAL,
-            payload: {colPath: collection, docId: setId, sets: sets.filter(set => set.dateStr === setId)[0][0]}
+            payload: {colPath: collection, docId: setId, sets: sets.filter(set => set.dateStr === setId)[0].sets}
         });
     }
 
@@ -291,7 +291,8 @@ const ExerciseCard = ({id}) => {
                                         <p className="google-font-500 text-decoration-underline">Weight</p>
                                     </div>
                                     {
-                                        dailySets[0].map((set, idx) => {
+                                        // dailySets[0].map((set, idx) => {
+                                        dailySets.sets.map((set, idx) => {
                                             return (
                                                 <div key={idx} className="d-flex justify-content-evenly">
                                                     <p className="google-font-400">{set.reps}</p>

@@ -5,6 +5,8 @@ import AppContext from '../contexts/AppContext';
 import APP_ACTION_TYPES from '../action-types/app-action-types';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const EditSetModal = () => {
 
@@ -20,7 +22,10 @@ const EditSetModal = () => {
 
     async function handleConfirmEdit() {
         try {
-            // handleOnHide();
+            const docRef = doc(db, colPath, docId);
+            const payload = {sets: repLines.filter(set => set.reps && set), date: docId};
+            await updateDoc(docRef, payload);
+            handleOnHide();
         } catch (e) {
             setError(e.message);
         }
@@ -90,8 +95,8 @@ const EditSetModal = () => {
             <Modal.Footer>
                 <Button variant="success" className="m-1" onClick={handleConfirmEdit}>Confirm Edit</Button>
                 <Button variant="danger" className="m-1" onClick={handleOnHide}>Cancel</Button>
-                {error && <p className="text-danger fw-bold fs-5 my-2">{error}</p>}
             </Modal.Footer>
+            {error && <p className="text-danger text-center fw-bold fs-5 my-2">{error}</p>}
         </Modal>
     );
 };
