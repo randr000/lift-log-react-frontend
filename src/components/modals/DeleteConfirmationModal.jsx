@@ -8,8 +8,8 @@ import { db } from '../../firebase';
 
 const DeleteConfirmationModal = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {showDeleteConfirmModal, user} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {showDeleteConfirmModal, user} = appState;
     const {colPath, docId, type} = showDeleteConfirmModal;
     
     // let docId;

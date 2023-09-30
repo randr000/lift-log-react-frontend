@@ -7,8 +7,8 @@ import About from './pages/About';
 
 const AppRoutes = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {signedIn, user} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {signedIn, user} = appState;
 
     return (
         <Routes>

@@ -9,8 +9,8 @@ import APP_ACTION_TYPES from '../../action-types/app-action-types';
 
 const ForgotPasswordModal = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {showForgotPasswordModal} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {showForgotPasswordModal} = appState;
     const {auth, email} = showForgotPasswordModal;
     const [error, setError] = useState(false);
     const [resetOk, setResetOk] = useState(false);

@@ -9,8 +9,8 @@ import { db } from "../../firebase";
 
 const AccountSettingsModal = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {showAccountSettingsModal, user, displayName} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {showAccountSettingsModal, user, displayName} = appState;
 
     function handleOnHide() {
         dispatch({

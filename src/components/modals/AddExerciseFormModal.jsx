@@ -9,8 +9,8 @@ import { db } from "../../firebase";
 
 const AddExerciseFormModal = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {user, showAddExerciseForm} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {user, showAddExerciseForm} = appState;
 
     const [exerciseName, setExerciseName] = useState('');
     const [exerciseNotes, setExerciseNotes] = useState('');

@@ -6,8 +6,8 @@ import APP_ACTION_TYPES from '../action-types/app-action-types';
 
 const AddExerciseCard = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {showAddExerciseForm} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {showAddExerciseForm} = appState;
     
     return (
         <Card className="mx-5 my-3 align-self-start" style={{width: '18rem'}}>

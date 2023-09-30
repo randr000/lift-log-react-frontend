@@ -10,8 +10,8 @@ import { db } from '../../firebase';
 
 const EditSetModal = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {showEditSetModal} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {showEditSetModal} = appState;
     const {colPath, docId, sets} = showEditSetModal;
     const [repLines, setRepLines] = useState(sets);
     const [error, setError] = useState(false);

@@ -9,7 +9,7 @@ describe('All navbar items render or do not render correctly when user is not si
     const initialRender = () => {
         render(
             <BrowserRouter>
-                <AppContext.Provider value={{app_state: APP_INITIAL_STATE, dispatch: () => {}}}>
+                <AppContext.Provider value={{appState: APP_INITIAL_STATE, dispatch: () => {}}}>
                     <SiteNavbar />
                 </AppContext.Provider>
             </BrowserRouter>
@@ -60,7 +60,7 @@ describe('All navbar items render or do not render correctly when user is signed
     const signInRender = () => {
         render(
             <BrowserRouter>
-                <AppContext.Provider value={{app_state: {...APP_INITIAL_STATE, signedIn: true}, dispatch: () => {}}}>
+                <AppContext.Provider value={{appState: {...APP_INITIAL_STATE, signedIn: true}, dispatch: () => {}}}>
                     <SiteNavbar />
                 </AppContext.Provider>
             </BrowserRouter>

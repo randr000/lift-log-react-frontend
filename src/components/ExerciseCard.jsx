@@ -14,8 +14,8 @@ import EditSetModal from './modals/EditSetModal';
 
 const ExerciseCard = ({id}) => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {user, showEditSetModal} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {user, showEditSetModal} = appState;
 
     const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
     const [exerciseDoc, setExerciseDoc] = useState({});

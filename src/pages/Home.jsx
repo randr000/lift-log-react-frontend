@@ -10,8 +10,8 @@ import APP_ACTION_TYPES from "../action-types/app-action-types";
 
 const Home = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {user, displayName, exercises} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {user, displayName, exercises} = appState;
 
     async function fetchDisplayName() {
         try {

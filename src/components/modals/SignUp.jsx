@@ -10,8 +10,8 @@ import { doc, setDoc } from "firebase/firestore";
 
 const SignUp = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
-    const {showSignUp, signUpError} = app_state;
+    const {appState, dispatch} = useContext(AppContext);
+    const {showSignUp, signUpError} = appState;
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');

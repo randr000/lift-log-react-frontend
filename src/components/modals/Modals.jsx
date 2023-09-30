@@ -10,12 +10,12 @@ import AppContext from "../../contexts/AppContext";
 
 const Modals = () => {
     
-    const {app_state, dispatch} = useContext(AppContext);
+    const {appState, dispatch} = useContext(AppContext);
     const {
         showEditSetModal,
         showForgotPasswordModal,
         showAccountSettingsModal
-    } = app_state;
+    } = appState;
 
     return (
         <>

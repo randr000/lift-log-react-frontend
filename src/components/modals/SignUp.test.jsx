@@ -8,7 +8,7 @@ describe('All sign up modal elements load', () => {
     const state = {...APP_INITIAL_STATE, showSignUp: true};
     const renderInitialLoad = () => {
         render(
-            <AppContext.Provider value={{app_state: state, dispatch: () => {}}}>
+            <AppContext.Provider value={{appState: state, dispatch: () => {}}}>
                 <SignUp />
             </AppContext.Provider>
         );
@@ -55,7 +55,7 @@ describe('All sign up modal elements do not load', () => {
 
     const renderInitialLoad = () => {
         render(
-            <AppContext.Provider value={{app_state: APP_INITIAL_STATE, dispatch: () => {}}}>
+            <AppContext.Provider value={{appState: APP_INITIAL_STATE, dispatch: () => {}}}>
                 <SignUp />
             </AppContext.Provider>
         );
@@ -103,7 +103,7 @@ describe('Email and password inputs update after input from keyboard', () => {
     const state = {...APP_INITIAL_STATE, showSignUp: true};
     const renderInitialLoad = () => {
         render(
-            <AppContext.Provider value={{app_state: state, dispatch: () => {}}}>
+            <AppContext.Provider value={{appState: state, dispatch: () => {}}}>
                 <SignUp />
             </AppContext.Provider>
         );

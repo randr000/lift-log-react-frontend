@@ -13,13 +13,13 @@ import { auth } from "../firebase";
 
 const SiteNavbar = () => {
 
-    const {app_state, dispatch} = useContext(AppContext);
+    const {appState, dispatch} = useContext(AppContext);
 
     const [showOffcanvas, setShowOffcanvas] = useState(false);
 
     const navigate = useNavigate();
 
-    const {signedIn, user} = app_state;
+    const {signedIn, user} = appState;
 
     function handleSignOut() {
         signOut(auth);
@@ -32,6 +32,13 @@ const SiteNavbar = () => {
 
     function handleHideOffcanvas() {
         setShowOffcanvas(false);
+    }
+
+    function handleViewProfile() {
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_ACCOUNT_SETTINGS_MODAL,
+            payload: true
+        });
     }
 
     return (
@@ -67,7 +74,13 @@ const SiteNavbar = () => {
                                     <Button variant="success" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL, payload: true})}>Sign Up</Button>
                                 </Nav.Item>
                             }
-                            {signedIn && <Nav.Item className="m-lg-2 my-1"><Button variant="primary" onClick={handleSignOut}>Sign Out</Button></Nav.Item>}
+                            {
+                                signedIn &&
+                                <div className="d-flex flex-row">
+                                    <Nav.Item className="m-lg-2 my-1"><Button variant="primary" onClick={handleSignOut}>Sign Out</Button></Nav.Item>
+                                    <Nav.Item className="m-lg-2 my-1"><Button variant="primary" onClick={handleViewProfile}>Account Settings</Button></Nav.Item>
+                                </div>
+                            }
                             <Nav.Item className="m-lg-2 my-1">
                                 <Button variant="primary" onClick={() => {navigate("/about"); handleHideOffcanvas();}}>About</Button>
                             </Nav.Item>

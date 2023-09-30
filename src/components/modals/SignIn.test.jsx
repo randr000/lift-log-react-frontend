@@ -9,7 +9,7 @@ describe('All sign in modal elements load', () => {
     const state = {...APP_INITIAL_STATE, showSignIn: true};
     const renderInitialLoad = () => {
         render(
-            <AppContext.Provider value={{app_state: state, dispatch: () => {}}}>
+            <AppContext.Provider value={{appState: state, dispatch: () => {}}}>
                 <SignIn />
             </AppContext.Provider>
         );
@@ -50,7 +50,7 @@ describe('All sign in modal elements do not load', () => {
 
     const renderInitialLoad = () => {
         render(
-            <AppContext.Provider value={{app_state: APP_INITIAL_STATE, dispatch: () => {}}}>
+            <AppContext.Provider value={{appState: APP_INITIAL_STATE, dispatch: () => {}}}>
                 <SignIn />
             </AppContext.Provider>
         );
@@ -92,7 +92,7 @@ describe('Email and Password inputs update after input from keyboard', () => {
     const state = {...APP_INITIAL_STATE, showSignIn: true};
     const renderInitialLoad = () => {
         render(
-            <AppContext.Provider value={{app_state: state, dispatch: () => {}}}>
+            <AppContext.Provider value={{appState: state, dispatch: () => {}}}>
                 <SignIn />
             </AppContext.Provider>
         );
