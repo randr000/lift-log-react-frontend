@@ -11,6 +11,7 @@ export const APP_INITIAL_STATE = {
     showAddExerciseForm: false,
     showViewSetsModal: false,
     showDeleteConfirmModal: false,
+    showEditSetModal: false,
     exercises: []
 };
 
@@ -43,6 +44,8 @@ export const appReducer = (state, action) => {
             return {...state, showViewSetsModal: {...state.showViewSetsModal, exerciseNotes: payload}};
         case APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL:
             return {...state, showDeleteConfirmModal: payload};
+        case APP_ACTION_TYPES.TOGGLE_EDIT_SET_MODAL:
+            return {...state, showEditSetModal: payload};
         case APP_ACTION_TYPES.GET_EXERCISE_NAMES:
             return {...state, exercises: payload};
         default: return state;

@@ -123,6 +123,11 @@ const ExerciseCard = ({id}) => {
         dispatch({type: APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL, payload: {colPath: collection, docId: setId, type: 'set'}});
     }
 
+    function handleDeleteExercise() {
+        const collection = `users/${user.uid}/exercises/${id}/sets`;
+        dispatch({type: APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL, payload: {colPath: collection, docId: id, type: 'exercise', sets: sets}});
+    }
+
     function handleHideAddSetForm() {
         setShowAddSetForm(false);
     }
@@ -197,6 +202,7 @@ const ExerciseCard = ({id}) => {
                         <>
                             <Modal.Title>{exerciseDoc.name}</Modal.Title>
                             <Button className="ms-2" variant="info" onClick={handleEditName}>Edit Name</Button>
+                            <Button className="ms-2" variant="danger" onClick={handleDeleteExercise}>Delete Exercise</Button>
                         </>
                     }
                 </Modal.Header>

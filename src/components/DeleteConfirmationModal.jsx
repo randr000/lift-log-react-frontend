@@ -3,17 +3,17 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import AppContext from '../contexts/AppContext';
 import APP_ACTION_TYPES from '../action-types/app-action-types';
-import { doc, deleteDoc } from 'firebase/firestore';
+import { doc, deleteDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const DeleteConfirmationModal = () => {
 
     const {app_state, dispatch} = useContext(AppContext);
-    const {showDeleteConfirmModal} = app_state;
-    const {colPath, type} = showDeleteConfirmModal;
+    const {showDeleteConfirmModal, user} = app_state;
+    const {colPath, docId, type} = showDeleteConfirmModal;
     
-    let docId;
-    if (type === 'set') docId = showDeleteConfirmModal.docId;
+    // let docId;
+    // if (type === 'set') docId = showDeleteConfirmModal.docId;
 
     const [error, setError] = useState(false);
     
@@ -22,12 +22,35 @@ const DeleteConfirmationModal = () => {
     }
 
     async function handleDelete() {
-        try {
-            await deleteDoc(doc(db, colPath, docId));
-            setError(false);
-            handleOnHide();
-        } catch (e) {
-            setError(e.message);
+        if (type === 'set') {
+            try {
+                await deleteDoc(doc(db, colPath, docId));
+                setError(false);
+                handleOnHide();
+                return;
+            } catch (e) {
+                setError(e.message);
+            }
+        }
+
+        if (type === 'exercise') {
+            try {
+                const batch = writeBatch(db);
+                const sets = showDeleteConfirmModal.sets;
+                
+                for (let set of sets) {
+                    batch.delete(doc(db, colPath, set.dateStr));
+                }
+                
+                const exerciseDocRef = doc(db, `users/${user.uid}/exercises`, docId);
+                batch.delete(exerciseDocRef);
+
+                await batch.commit();
+                handleOnHide();
+                return;
+            } catch (e) {
+                setError(e.message);
+            }
         }
     }
     
