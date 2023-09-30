@@ -4,12 +4,13 @@ import SignUp from "./SignUp";
 import AddExerciseFormModal from "./AddExerciseFormModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import EditSetModal from "./EditSetModal";
-import AppContext from "../contexts/AppContext";
+import ForgotPasswordModal from "./ForgotPasswordModal";
+import AppContext from "../../contexts/AppContext";
 
 const Modals = () => {
     
     const {app_state, dispatch} = useContext(AppContext);
-    const {showEditSetModal} = app_state;
+    const {showEditSetModal, showForgotPasswordModal} = app_state;
 
     return (
         <>
@@ -18,6 +19,7 @@ const Modals = () => {
             <AddExerciseFormModal/>
             <DeleteConfirmationModal/>
             {showEditSetModal && <EditSetModal/>}
+            {showForgotPasswordModal && <ForgotPasswordModal/>}
         </>
     );
 };

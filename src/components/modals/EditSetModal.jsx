@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import AppContext from '../contexts/AppContext';
-import APP_ACTION_TYPES from '../action-types/app-action-types';
+import AppContext from '../../contexts/AppContext';
+import APP_ACTION_TYPES from '../../action-types/app-action-types';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
 const EditSetModal = () => {
 

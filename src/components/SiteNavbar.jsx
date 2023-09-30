@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import Modals from "./Modals";
+import Modals from "./modals/Modals";
 import Button from "react-bootstrap/Button";
 import { Router, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";

@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import AppContext from '../contexts/AppContext';
+import AppContext from '../../contexts/AppContext';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth } from '../../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import APP_ACTION_TYPES from '../action-types/app-action-types';
+import APP_ACTION_TYPES from '../../action-types/app-action-types';
 
 const SignIn = () => {
 
@@ -15,24 +15,33 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function handleLogin(event) {
+    async function handleLogin(event) {
         event.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                dispatch({type: APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL, payload: user});
-                console.log(user);
-            })
-            .catch((error) => {
-                dispatch({type: APP_ACTION_TYPES.SIGN_IN_UNSUCCESSFUL});
-                const errorCode = error.code;
-                const errorMessage = error.message;
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            dispatch({type: APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL, payload: user});
+
+        } catch (e) {
+            const errorCode = e.code;
+            const errorMessage = e.message;
+            dispatch({
+                type: APP_ACTION_TYPES.SIGN_IN_UNSUCCESSFUL,
+                payload: `Error Code: ${errorCode} Error Msg.: ${errorMessage}`
             });
+        }
     };
 
     function handleOnHide() {
         dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: false})
+    }
+
+    function handleForgotPassword(auth, email) {
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_FORGOT_PASSWORD_MODAL,
+            payload: {auth: auth, email: email}
+        });
     }
 
     return (
@@ -54,15 +63,16 @@ const SignIn = () => {
                     <Modal.Footer className="d-flex flex-column">
                         <div>
                             <Button className="m-1" type="submit" variant="primary">Sign In</Button>
-                            <Button className="m-1" variant="secondary" onClick={() => dispatch({
-                                    type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL,
-                                    payload: false
-                                    })}
-                            >
-                                Cancel
-                            </Button>
+                            <Button className="m-1" variant="info" onClick={() => handleForgotPassword(auth, email)}>Forgot Password</Button>
+                            <Button className="m-1" variant="secondary" onClick={handleOnHide}>Cancel</Button>
                         </div>
-                        {signInError && <p className="text-danger fw-bold">Wrong Email or Password</p>}
+                        {
+                            signInError &&
+                            <div>
+                                <p className="text-danger fw-bold">Sign In Error</p>
+                                <p className="text-danger fw-bold">{signInError}</p>
+                            </div>
+                        }
                     </Modal.Footer>
                 </Form>
         </Modal>

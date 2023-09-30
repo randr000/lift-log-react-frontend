@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import AppContext from '../contexts/AppContext';
-import APP_ACTION_TYPES from '../action-types/app-action-types';
+import AppContext from '../../contexts/AppContext';
+import APP_ACTION_TYPES from '../../action-types/app-action-types';
 import { doc, deleteDoc, writeBatch } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
 const DeleteConfirmationModal = () => {
 

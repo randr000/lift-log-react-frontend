@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import AppContext from "../contexts/AppContext";
-import APP_ACTION_TYPES from "../action-types/app-action-types";
+import AppContext from "../../contexts/AppContext";
+import APP_ACTION_TYPES from "../../action-types/app-action-types";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { doc, setDoc, addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 const AddExerciseFormModal = () => {
 
