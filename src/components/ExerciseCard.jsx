@@ -10,12 +10,12 @@ import { db } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
-import DeleteConfirmationModal from './DeleteConfirmationModal';
+import EditSetModal from './EditSetModal';
 
 const ExerciseCard = ({id}) => {
 
     const {app_state, dispatch} = useContext(AppContext);
-    const {user} = app_state;
+    const {user, showEditSetModal} = app_state;
 
     const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
     const [exerciseDoc, setExerciseDoc] = useState({});
@@ -110,9 +110,17 @@ const ExerciseCard = ({id}) => {
         }
     }
 
-    async function handleDeleteSet(setId) {
+    function handleEditSet(setId) {
         const collection = `users/${user.uid}/exercises/${id}/sets`;
-        dispatch({type: APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL, payload: {show: true, colPath: collection, docId: setId, type: 'set'}});
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_EDIT_SET_MODAL,
+            payload: {colPath: collection, docId: setId, sets: sets.filter(set => set.dateStr === setId)[0][0]}
+        });
+    }
+
+    function handleDeleteSet(setId) {
+        const collection = `users/${user.uid}/exercises/${id}/sets`;
+        dispatch({type: APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL, payload: {colPath: collection, docId: setId, type: 'set'}});
     }
 
     function handleHideAddSetForm() {
@@ -275,7 +283,7 @@ const ExerciseCard = ({id}) => {
                                     <hr/>
                                     <p className="google-font-800 text-center">{dailySets.dateStr}</p>
                                     <div className="d-flex justify-content-center">
-                                        <Button variant="info" className="me-4" onClick={() => {}}>Edit Sets</Button>
+                                        <Button variant="info" className="me-4" onClick={() => handleEditSet(dailySets.dateStr)}>Edit Sets</Button>
                                         <Button variant="danger" className="ms-4" onClick={() => handleDeleteSet(dailySets.dateStr)}>Delete Sets</Button>
                                     </div>
                                     <div className="d-flex justify-content-evenly">
@@ -300,6 +308,7 @@ const ExerciseCard = ({id}) => {
                 </Modal.Body>
             </Modal>
 
+            {/* {showEditSetModal && <EditSetModal/>} */}
         </>
     );
 };

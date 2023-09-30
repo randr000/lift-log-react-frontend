@@ -10,10 +10,10 @@ const DeleteConfirmationModal = () => {
 
     const {app_state, dispatch} = useContext(AppContext);
     const {showDeleteConfirmModal} = app_state;
-    const {show, colPath, type} = showDeleteConfirmModal;
+    const {colPath, type} = showDeleteConfirmModal;
     
     let docId;
-    if (type === 'set')  docId = showDeleteConfirmModal.docId;
+    if (type === 'set') docId = showDeleteConfirmModal.docId;
 
     const [error, setError] = useState(false);
     
@@ -24,6 +24,7 @@ const DeleteConfirmationModal = () => {
     async function handleDelete() {
         try {
             await deleteDoc(doc(db, colPath, docId));
+            setError(false);
             handleOnHide();
         } catch (e) {
             setError(e.message);
