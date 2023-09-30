@@ -307,8 +307,6 @@ const ExerciseCard = ({id}) => {
                    }
                 </Modal.Body>
             </Modal>
-
-            {/* {showEditSetModal && <EditSetModal/>} */}
         </>
     );
 };

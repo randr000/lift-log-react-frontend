@@ -28,28 +28,38 @@ const EditSetModal = () => {
 
     function handleEditRepLine(idx, event) {
         const {name, value} = event.target;
-        return;
+        const arr = [...repLines];
+        arr[idx][name] = value;
+        setRepLines(arr);
     }
 
-    function handleDeleteRepLine(idx, event) {
-        const {name, value} = event.target;
-        return;
+    function handleAddRepLine() {
+        setRepLines(prev => [...prev, {
+            reps: '',
+            weight: ''
+        }]);
+    }
+
+    function handleDeleteRepLine(idx) {
+        const arr = [...repLines];
+        arr.splice(idx, 1);
+        setRepLines(arr);
     }
 
     return (
         <Modal show={showEditSetModal} onHide={handleOnHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Set</Modal.Title>
+                <Modal.Title>{`Edit Set: ${docId}`}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
                     {
                         repLines.map((line, idx) => {
                             return (
-                                <div className="d-flex flex-row" key={idx}>
+                                <div className="d-flex flex-row mt-2" key={idx}>
                                     <Form.Group>
                                         <Form.Label>Reps</Form.Label>
-                                        <Form.Control className="w-50" type="number" name="weight" value={line.reps} onChange={(e) => handleEditRepLine(idx, e)}/>
+                                        <Form.Control className="w-50" type="number" name="reps" value={line.reps} onChange={(e) => handleEditRepLine(idx, e)}/>
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Weight</Form.Label>
@@ -59,7 +69,7 @@ const EditSetModal = () => {
                                         pill bg="danger"
                                         className="google-font-100 text-white fs-4 w-25 align-self-center mb-1 display"
                                         role="button"
-                                        onClick={(e) => handleDeleteRepLine(idx, e)}
+                                        onClick={() => handleDeleteRepLine(idx)}
                                     >
                                         -
                                     </Badge>
@@ -68,6 +78,14 @@ const EditSetModal = () => {
                         })
                     }
                 </Form>
+                <Badge
+                    pill bg="success"
+                    className="google-font-100 text-white fs-4 w-25 align-self-center mt-3 display"
+                    role="button"
+                    onClick={handleAddRepLine}
+                >
+                    +
+                </Badge>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="success" className="m-1" onClick={handleConfirmEdit}>Confirm Edit</Button>
