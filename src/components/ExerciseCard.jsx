@@ -10,6 +10,7 @@ import { db } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 const ExerciseCard = ({id}) => {
 
@@ -84,7 +85,7 @@ const ExerciseCard = ({id}) => {
         setShowAddSetForm(true);
     }
 
-    function handleSubmitAddSetForm() {
+    async function handleSubmitAddSetForm() {
         try {
             if (!date) {
                 setSubmitAddSetsError('You must select a date before submitting!');
@@ -97,7 +98,7 @@ const ExerciseCard = ({id}) => {
             } else {
                 const payload = {...[repLinesFormInput.filter(set => set.reps && set)], date: date};
                 const docRef = doc(db, `users/${user.uid}/exercises/${id}/sets`, date);
-                setDoc(docRef, payload, {merge: true});
+                await setDoc(docRef, payload, {merge: true});
                 setSubmitAddSetsError(false);
                 setDate(false);
                 setRepLinesFormInput([]);
@@ -107,6 +108,11 @@ const ExerciseCard = ({id}) => {
         } catch (e) {
             setSubmitAddSetsError(e.message);
         }
+    }
+
+    async function handleDeleteSet(setId) {
+        const collection = `users/${user.uid}/exercises/${id}/sets`;
+        dispatch({type: APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL, payload: {show: true, colPath: collection, docId: setId, type: 'set'}});
     }
 
     function handleHideAddSetForm() {
@@ -270,7 +276,7 @@ const ExerciseCard = ({id}) => {
                                     <p className="google-font-800 text-center">{dailySets.dateStr}</p>
                                     <div className="d-flex justify-content-center">
                                         <Button variant="info" className="me-4" onClick={() => {}}>Edit Sets</Button>
-                                        <Button variant="danger" className="ms-4" onClick={() => {}}>Delete Sets</Button>
+                                        <Button variant="danger" className="ms-4" onClick={() => handleDeleteSet(dailySets.dateStr)}>Delete Sets</Button>
                                     </div>
                                     <div className="d-flex justify-content-evenly">
                                         <p className="google-font-500 text-decoration-underline">Reps</p>
