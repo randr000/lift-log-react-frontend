@@ -297,7 +297,6 @@ const ExerciseCard = ({id}) => {
                                         <p className="google-font-500 text-decoration-underline">Weight</p>
                                     </div>
                                     {
-                                        // dailySets[0].map((set, idx) => {
                                         dailySets.sets.map((set, idx) => {
                                             return (
                                                 <div key={idx} className="d-flex justify-content-evenly">
