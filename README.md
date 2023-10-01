@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# liftlog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Site](https://lift-log-react.vercel.app/)
 
-## Available Scripts
+## Project Description
 
-In the project directory, you can run:
+I recently started a weight lifting routine and would struggle to remember exactly how much weight I lifted and how many reps I did for every exercise. I know there are apps out there that can help with this but I didn't want one with a lot of ads or other distractions so I would manually keep track of my progress on a note taking app on my phone. This was ok for a few weeks but then it got too big too quickly look things up. I've also been learning web development and then came up with the idea to create my own web app where I can easily keep track of my progress. For anyone who decides to use this app, please keep in mind it is not a commercial app, there are no ads, and should only be used for educational purposes only. Please do not upload any personal or private information.
 
-### `npm start`
+### Front-end
+- React
+- Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Back-end
+- [Firebase](https://firebase.google.com/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Why Firebase?
+I was already somewhat familiar with it since I used it in another project for a class I took and setting up authentication is not that difficult. It also has a pretty good free tier with no credit card required for signing up.
 
-### `npm test`
+The app is responsive and is meant to work on desktops and well as on tablets or phones.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Landing Page Desktop](./readme_assets/img/lift-log-landing-desktop.png)
 
-### `npm run build`
+![Landing Page Mobile](./readme_assets/img/lift-log-landing-mobile.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Sign In Desktop](./readme_assets/img/lift-log-signin-desktop.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Sign In Mobile](./readme_assets/img/lift-log-signin-mobile.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Upon logging in, a user can add an exercise.
 
-### `npm run eject`
+![Add Exercise Modal](./readme_assets/img/add-exercise-modal.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Once a user adds exercises, they will show up on their home page. They can expand the card to quickly see any notes about the exercise they wrote down. Then can then click on the notes or title of the card to open it.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Home Page Exercise Notes](./readme_assets/img/home-page-exercise-notes.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Once open, a user can edit the exercise name and notes. They can also add sets. For convenience, a user can enter rep and weight amounts in the Update All boxes and all rep lines will update to those amounts. A user can then edit or remove any individual lines if they would like to. Due to the fact that Firebase charges by the number of documents read or written to the Firestore Database and not by the size of the data, all daily sets for a particular exercise are uploaded as one document instead of each individual set. The user also had the option to delete an exercise. If they choose to do this, all information regarding this exercise, including all sets, will be deleted. Alternatively, they can choose to delete an individual daily set of sets as well.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Edit Exercise Add Sets](./readme_assets/gif/edit-exercise-add-sets.gif)
 
-## Learn More
+A user can also edit previously entered sets.
+![Edit Set](./readme_assets/img/edit-set.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A neat feature of the Firestore Database is it gives the option of real time updates. If a user is logged into the app on their desktop and their phone, they do not have to refresh the page to get updated data.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Edit Sets Real Time](./readme_assets/gif/edit-sets-real-time.gif)
 
-### Code Splitting
+Watch how the user deletes the exercise in the desktop site and it automatically deletes in the mobile version. You cannot tell by the gif but I have each version open in different browsers. I have event tested this using my phone.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Delete Exercise Real Time](./readme_assets/gif/delete-exercise-real-time.gif)
 
-### Analyzing the Bundle Size
+If a user would like to reset their password or delete their account, they can do so by clicking on the Account Setting button.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If they choose to reset their password, they will be logged out and an email will be sent to the one they used to sign up instructing how to reset.
 
-### Making a Progressive Web App
+If they choose to delete their account, all their inforation and exerise data will be deleted. The information cannot be recovered.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![Account Settings](./readme_assets/img/account%20settings.png)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
