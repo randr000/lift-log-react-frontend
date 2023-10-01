@@ -1,5 +1,4 @@
 {
-  "homepage": "https://randr000/github.io/lift-log-react-frontend",
   "name": "liftlog_react",
   "version": "0.1.0",
   "private": true,
@@ -48,8 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^6.0.0"
   }
 }
