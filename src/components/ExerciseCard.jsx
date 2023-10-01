@@ -180,7 +180,7 @@ const ExerciseCard = ({id}) => {
                             {isAccordionExpanded ? "Collapse" : "Expand"}
                         </Accordion.Header>
                         <Accordion.Body onClick={handleViewSetsClick} style={{cursor: "pointer"}}>
-                            <h1>{exerciseDoc.notes}</h1>
+                            <p className="google-font-400">{`Notes: ${exerciseDoc.notes}`}</p>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
