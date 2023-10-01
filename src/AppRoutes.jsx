@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AppContext from './contexts/AppContext';
 import Landing from './pages/Landing';
@@ -8,7 +8,7 @@ import About from './pages/About';
 const AppRoutes = () => {
 
     const {appState, dispatch} = useContext(AppContext);
-    const {signedIn, user} = appState;
+    const {user} = appState;
 
     return (
         <Routes>

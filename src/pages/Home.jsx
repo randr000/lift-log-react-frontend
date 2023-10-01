@@ -7,7 +7,6 @@ import { doc, getDoc, onSnapshot, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import APP_ACTION_TYPES from "../action-types/app-action-types";
 
-
 const Home = () => {
 
     const {appState, dispatch} = useContext(AppContext);

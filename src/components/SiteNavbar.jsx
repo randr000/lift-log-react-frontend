@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Modals from "./modals/Modals";
 import Button from "react-bootstrap/Button";
-import { Router, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";

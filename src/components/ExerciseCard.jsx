@@ -10,7 +10,6 @@ import { db } from '../firebase';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
-import EditSetModal from './modals/EditSetModal';
 
 const ExerciseCard = ({id}) => {
 

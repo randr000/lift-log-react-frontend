@@ -3,9 +3,7 @@ import AppContext from "../../contexts/AppContext";
 import APP_ACTION_TYPES from "../../action-types/app-action-types";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 
 const AccountSettingsModal = () => {
