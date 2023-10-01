@@ -34,7 +34,10 @@ const AccountSettingsModal = () => {
     }
 
     function handleDeleteUser() {
-        return;
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_DELETE_CONFIRM_MODAL,
+            payload: {colPath: 'users', docId: user.uid, type: 'user'}
+        });
     }
 
     return (
@@ -44,7 +47,7 @@ const AccountSettingsModal = () => {
             </Modal.Header>
             <Modal.Body>
                 <Button className="m-1" variant="primary" onClick={handlePasswordReset}>Reset Password</Button>
-                <Button className="m-1" variant="danger" onClick={handlePasswordReset}>Delete Profile</Button>
+                <Button className="m-1" variant="danger" onClick={handleDeleteUser}>Delete Profile</Button>
             </Modal.Body>
                 {
                     error &&
