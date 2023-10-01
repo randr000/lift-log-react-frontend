@@ -62,26 +62,33 @@ const SiteNavbar = () => {
                         <Nav >
                             {
                                 !signedIn &&
-                                <Nav.Item className="m-lg-2 my-1">
+                                <Nav.Item className="m-lg-2">
                                     <Button variant="primary" className="btn-block" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: true})}>
                                         Sign In
                                     </Button>
                                 </Nav.Item>
+                                
                             }
                             {
                                 !signedIn &&
-                                <Nav.Item className="m-lg-2 my-1">
+                                <Nav.Item className="m-lg-2 mt-2">
                                     <Button variant="success" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL, payload: true})}>Sign Up</Button>
                                 </Nav.Item>
                             }
                             {
                                 signedIn &&
-                                <div className="d-flex flex-row">
-                                    <Nav.Item className="m-lg-2 my-1"><Button variant="primary" onClick={handleSignOut}>Sign Out</Button></Nav.Item>
-                                    <Nav.Item className="m-lg-2 my-1"><Button variant="primary" onClick={handleViewProfile}>Account Settings</Button></Nav.Item>
-                                </div>
+                                <Nav.Item className="m-lg-2">
+                                    <Button variant="primary" onClick={handleSignOut}>Sign Out</Button>
+                                </Nav.Item>
+                                    
                             }
-                            <Nav.Item className="m-lg-2 my-1">
+                            {
+                                signedIn &&
+                                <Nav.Item className="m-lg-2 mt-2">
+                                    <Button variant="primary" onClick={handleViewProfile}>Account Settings</Button>
+                                </Nav.Item>
+                            }
+                            <Nav.Item className="m-lg-2 mt-2">
                                 <Button variant="primary" onClick={() => {navigate("/about"); handleHideOffcanvas();}}>About</Button>
                             </Nav.Item>
                         </Nav>
