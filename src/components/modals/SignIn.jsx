@@ -10,7 +10,7 @@ import APP_ACTION_TYPES from '../../action-types/app-action-types';
 const SignIn = () => {
 
     const {appState, dispatch} = useContext(AppContext);
-    const {showSignIn, signInError} = appState;
+    const {showSignIn, signInError, showOffCanvas} = appState;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +22,8 @@ const SignIn = () => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             dispatch({type: APP_ACTION_TYPES.SIGN_IN_SUCCESSFUL, payload: user});
-
+            dispatch({type: APP_ACTION_TYPES.TOGGLE_SHOW_OFF_CANVAS, payload: false});
+            
         } catch (e) {
             const errorCode = e.code;
             const errorMessage = e.message;

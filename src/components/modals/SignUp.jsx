@@ -11,7 +11,7 @@ import { doc, setDoc } from "firebase/firestore";
 const SignUp = () => {
 
     const {appState, dispatch} = useContext(AppContext);
-    const {showSignUp, signUpError} = appState;
+    const {showSignUp, signUpError, showOffCanvas} = appState;
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -47,6 +47,8 @@ const SignUp = () => {
             const payload = {display_name: displayName};
             await setDoc(docRef, payload);
             dispatch({type: APP_ACTION_TYPES.SIGN_UP_SUCCESSFUL, payload: user});
+            dispatch({type: APP_ACTION_TYPES.TOGGLE_SHOW_OFF_CANVAS, payload: false});
+            
         } catch (e) {
             
             const errorCode = e.code;

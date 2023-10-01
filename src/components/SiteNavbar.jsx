@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Modals from "./modals/Modals";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
@@ -14,29 +14,55 @@ import { auth } from "../firebase";
 const SiteNavbar = () => {
 
     const {appState, dispatch} = useContext(AppContext);
-
-    const [showOffcanvas, setShowOffcanvas] = useState(false);
+    const {showOffCanvas} = appState;
 
     const navigate = useNavigate();
 
-    const {signedIn, user} = appState;
+    const {signedIn} = appState;
 
     function handleSignOut() {
         signOut(auth);
         dispatch({type: APP_ACTION_TYPES.SIGN_OUT});
+        handleHideOffcanvas();
     }
 
     function handleShowOffCanvas() {
-        setShowOffcanvas(true);
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_SHOW_OFF_CANVAS,
+            payload: true
+        });
     }
 
     function handleHideOffcanvas() {
-        setShowOffcanvas(false);
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_SHOW_OFF_CANVAS,
+            payload: false
+        });
     }
 
-    function handleViewProfile() {
+    function handleViewSettings() {
         dispatch({
             type: APP_ACTION_TYPES.TOGGLE_ACCOUNT_SETTINGS_MODAL,
+            payload: true
+        });
+        handleHideOffcanvas();
+    }
+
+    function handleNavigateToAboutPage() {
+        navigate("/about");
+        handleHideOffcanvas();
+    }
+
+    function handleSignInClick() {
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL,
+            payload: true
+        });
+    }
+
+    function handleSignUpClick() {
+        dispatch({
+            type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL,
             payload: true
         });
     }
@@ -54,7 +80,7 @@ const SiteNavbar = () => {
                     liftlog
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleShowOffCanvas}/>
-                <Navbar.Offcanvas show={showOffcanvas} onHide={handleHideOffcanvas} placement="top">
+                <Navbar.Offcanvas show={showOffCanvas} onHide={handleHideOffcanvas} placement="top">
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title />
                     </Offcanvas.Header>
@@ -63,7 +89,7 @@ const SiteNavbar = () => {
                             {
                                 !signedIn &&
                                 <Nav.Item className="m-lg-2">
-                                    <Button variant="primary" className="btn-block" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_IN_MODAL, payload: true})}>
+                                    <Button variant="primary" className="btn-block" onClick={handleSignInClick}>
                                         Sign In
                                     </Button>
                                 </Nav.Item>
@@ -72,7 +98,7 @@ const SiteNavbar = () => {
                             {
                                 !signedIn &&
                                 <Nav.Item className="m-lg-2 mt-2">
-                                    <Button variant="success" onClick={() => dispatch({type: APP_ACTION_TYPES.TOGGLE_SIGN_UP_MODAL, payload: true})}>Sign Up</Button>
+                                    <Button variant="success" onClick={handleSignUpClick}>Sign Up</Button>
                                 </Nav.Item>
                             }
                             {
@@ -85,11 +111,11 @@ const SiteNavbar = () => {
                             {
                                 signedIn &&
                                 <Nav.Item className="m-lg-2 mt-2">
-                                    <Button variant="primary" onClick={handleViewProfile}>Account Settings</Button>
+                                    <Button variant="primary" onClick={handleViewSettings}>Account Settings</Button>
                                 </Nav.Item>
                             }
                             <Nav.Item className="m-lg-2 mt-2">
-                                <Button variant="primary" onClick={() => {navigate("/about"); handleHideOffcanvas();}}>About</Button>
+                                <Button variant="primary" onClick={handleNavigateToAboutPage}>About</Button>
                             </Nav.Item>
                         </Nav>
                     </Offcanvas.Body>

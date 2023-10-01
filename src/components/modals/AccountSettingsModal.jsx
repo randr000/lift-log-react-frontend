@@ -41,7 +41,9 @@ const AccountSettingsModal = () => {
     return (
         <Modal show={showAccountSettingsModal} onHide={handleOnHide}>
             <Modal.Header closeButton>
-                <Modal.Title>{`${displayName}'${/s/i.test(displayName[displayName.length-1]) ? '' : 's'} Account Settings`}</Modal.Title>
+                <Modal.Title>
+                    {`${displayName}'${/s/i.test(displayName[displayName.length-1]) ? '' : 's'} Account Settings`}
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Button className="m-1" variant="primary" onClick={handlePasswordReset}>Reset Password</Button>
