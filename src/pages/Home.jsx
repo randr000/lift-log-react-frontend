@@ -44,7 +44,11 @@ const Home = () => {
             <h1 className="google-font-800 text-white text-center mt-5 fs-1">{`Welcome back, ${displayName}!`}</h1>
             <div className="d-flex flex-row flex-wrap justify-content-center justify-content-lg-start">
                 <AddExerciseCard/>
-                {exercises.map(exercise => <ExerciseCard key={exercise.id} id={exercise.id} name={exercise.name} notes={exercise.notes} />)}
+                {
+                    exercises
+                        .toSorted((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0)
+                        .map(exercise => <ExerciseCard key={exercise.id} id={exercise.id} name={exercise.name} notes={exercise.notes} />)
+                }
             </div>
         </BlueBackground>
     );
